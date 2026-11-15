@@ -1,0 +1,419 @@
+openapi: 3.0.3
+info:
+  title: University Academic & Finance REST APIs
+  version: 1.1.0
+  description: >
+    Đặc tả OpenAPI 3.0 cho hai dịch vụ Backend độc lập (Academic API và Finance API)
+    trong Bài tập lớn Chủ đề 04 - Nhập môn Tích hợp Hệ thống (Nhóm 17 - Thành viên A: Bùi Mạnh Hiếu).
+servers:
+  - url: http://127.0.0.1:5001
+    description: Academic API Server (Quản lý thông tin sinh viên)
+  - url: http://127.0.0.1:5002
+    description: Finance API Server (Quản lý khoản học phí)
+
+tags:
+  - name: System
+    description: Kiểm tra trạng thái hoạt động của dịch vụ
+  - name: Academic
+    description: Các API thuộc Academic Service (cổng 5001)
+  - name: Finance
+    description: Các API thuộc Finance Service (cổng 5002)
+
+paths:
+  /health:
+    get:
+      tags:
+        - System
+      summary: Kiểm tra dịch vụ còn hoạt động (Health Check)
+      description: Trả về trạng thái UP của dịch vụ Academic (5001) hoặc Finance (5002).
+      responses:
+        "200":
+          description: Dịch vụ đang hoạt động bình thường
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+              examples:
+                academic:
+                  summary: Academic API Health
+                  value:
+                    service: academic
+                    status: UP
+                finance:
+                  summary: Finance API Health
+                  value:
+                    service: finance
+                    status: UP
+
+  /api/students:
+    get:
+      tags:
+        - Academic
+      summary: Lấy danh sách toàn bộ sinh viên
+      description: Trả về tổng số lượng và danh sách 10 sinh viên giả lập (SV001 - SV010).
+      servers:
+        - url: http://127.0.0.1:5001
+      responses:
+        "200":
+          description: Danh sách sinh viên
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudentListResponse"
+
+  /api/students/{sid}:
+    get:
+      tags:
+        - Academic
+      summary: Lấy thông tin chi tiết của một sinh viên
+      servers:
+        - url: http://127.0.0.1:5001
+      parameters:
+        - $ref: "#/components/parameters/StudentIdParam"
+      responses:
+        "200":
+          description: Tìm thấy thông tin sinh viên
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Student"
+        "400":
+          description: Mã sinh viên không đúng định dạng ^SV\d{3}$
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: INVALID_ID
+                message: Mã SV phải dạng SV + 3 chữ số, vd SV001
+        "404":
+          description: Không tìm thấy sinh viên trong hệ thống
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: NOT_FOUND
+                message: Không có sinh viên SV999
+
+  /api/fees/{sid}:
+    get:
+      tags:
+        - Finance
+      summary: Lấy danh sách khoản học phí và tổng hợp công nợ của sinh viên
+      description: >
+        Trả về chi tiết các khoản phí cùng tổng tiền phải đóng (total), đã đóng (paid)
+        và còn nợ (balance). Hỗ trợ tham số ?delay= để giả lập độ trễ mạng.
+      servers:
+        - url: http://127.0.0.1:5002
+      parameters:
+        - $ref: "#/components/parameters/StudentIdParam"
+        - name: delay
+          in: query
+          required: false
+          description: Thời gian giả lập trễ phản hồi tính bằng giây (tối đa 10 giây) dùng để kiểm thử timeout của Portal.
+          schema:
+            type: number
+            format: float
+            minimum: 0
+            maximum: 10
+            example: 3
+      responses:
+        "200":
+          description: Lấy thông tin học phí thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StudentFeesResponse"
+        "400":
+          description: Mã sinh viên sai định dạng
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: INVALID_ID
+                message: Mã SV không hợp lệ
+        "404":
+          description: Sinh viên chưa có khoản học phí nào trong hệ thống Finance
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: NOT_FOUND
+                message: Chưa có khoản phí cho SV008
+
+    post:
+      tags:
+        - Finance
+      summary: Tạo khoản học phí mới cho sinh viên
+      servers:
+        - url: http://127.0.0.1:5002
+      parameters:
+        - $ref: "#/components/parameters/StudentIdParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFeeRequest"
+            example:
+              term: HK1-2026
+              amount: 9000000
+      responses:
+        "201":
+          description: Tạo khoản học phí mới thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeeItem"
+              example:
+                fee_id: F006
+                term: HK1-2026
+                amount: 9000000
+                paid: 0
+        "400":
+          description: Mã SV sai định dạng hoặc body JSON thiếu trường / amount <= 0
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: INVALID_BODY
+                message: Cần term (chuỗi) và amount > 0
+
+  /api/fees/{sid}/{fee_id}:
+    put:
+      tags:
+        - Finance
+      summary: Cập nhật thông tin một khoản học phí (số tiền đã nộp, tổng phí hoặc học kỳ)
+      servers:
+        - url: http://127.0.0.1:5002
+      parameters:
+        - $ref: "#/components/parameters/StudentIdParam"
+        - $ref: "#/components/parameters/FeeIdParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFeeRequest"
+            example:
+              paid: 12500000
+      responses:
+        "200":
+          description: Cập nhật khoản phí thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeeItem"
+        "400":
+          description: Mã SV không hợp lệ hoặc dữ liệu cập nhật vi phạm ràng buộc (0 <= paid <= amount)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: INVALID_BODY
+                message: paid phải nằm trong khoảng [0, amount]
+        "404":
+          description: Không tìm thấy khoản phí tương ứng của sinh viên
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: NOT_FOUND
+                message: Không tìm thấy khoản phí F002 của SV002
+
+    delete:
+      tags:
+        - Finance
+      summary: Xóa một khoản học phí của sinh viên
+      servers:
+        - url: http://127.0.0.1:5002
+      parameters:
+        - $ref: "#/components/parameters/StudentIdParam"
+        - $ref: "#/components/parameters/FeeIdParam"
+      responses:
+        "200":
+          description: Xóa khoản phí thành công
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteFeeResponse"
+        "400":
+          description: Mã sinh viên không hợp lệ
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: INVALID_ID
+                message: Mã SV không hợp lệ
+        "404":
+          description: Không tìm thấy khoản phí cần xóa
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              example:
+                error: NOT_FOUND
+                message: Không tìm thấy khoản phí F005 của SV005
+
+components:
+  parameters:
+    StudentIdParam:
+      name: sid
+      in: path
+      required: true
+      description: Mã định danh sinh viên theo định dạng SV + 3 chữ số
+      schema:
+        type: string
+        pattern: '^SV\d{3}$'
+        example: SV001
+    FeeIdParam:
+      name: fee_id
+      in: path
+      required: true
+      description: Mã định danh khoản học phí (ví dụ F001, F002)
+      schema:
+        type: string
+        example: F002
+
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        service:
+          type: string
+          example: academic
+        status:
+          type: string
+          example: UP
+
+    Student:
+      type: object
+      properties:
+        student_id:
+          type: string
+          example: SV001
+        full_name:
+          type: string
+          example: Nguyễn Văn An
+        major:
+          type: string
+          example: Công nghệ thông tin
+        email:
+          type: string
+          format: email
+          example: sv001@student.edu.vn
+        gpa:
+          type: number
+          format: float
+          example: 3.2
+
+    StudentListResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 10
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Student"
+
+    FeeItem:
+      type: object
+      properties:
+        fee_id:
+          type: string
+          example: F002
+        term:
+          type: string
+          example: HK1-2026
+        amount:
+          type: number
+          example: 12500000
+        paid:
+          type: number
+          example: 5000000
+
+    StudentFeesResponse:
+      type: object
+      properties:
+        student_id:
+          type: string
+          example: SV002
+        fees:
+          type: array
+          items:
+            $ref: "#/components/schemas/FeeItem"
+        total:
+          type: number
+          example: 12500000
+        paid:
+          type: number
+          example: 5000000
+        balance:
+          type: number
+          example: 7500000
+
+    CreateFeeRequest:
+      type: object
+      required:
+        - term
+        - amount
+      properties:
+        term:
+          type: string
+          minLength: 1
+          example: HK1-2026
+        amount:
+          type: number
+          exclusiveMinimum: 0
+          example: 9000000
+
+    UpdateFeeRequest:
+      type: object
+      description: Truyền ít nhất một trong các trường cần cập nhật
+      properties:
+        term:
+          type: string
+          minLength: 1
+          example: HK1-2026
+        amount:
+          type: number
+          exclusiveMinimum: 0
+          example: 12500000
+        paid:
+          type: number
+          minimum: 0
+          example: 12500000
+
+    DeleteFeeResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Đã xóa khoản phí F005
+        deleted:
+          $ref: "#/components/schemas/FeeItem"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          enum:
+            - INVALID_ID
+            - NOT_FOUND
+            - INVALID_BODY
+            - ALL_DOWN
+            - SERVICE_UNAVAILABLE
+          example: NOT_FOUND
+        message:
+          type: string
+          example: Không có sinh viên SV999
