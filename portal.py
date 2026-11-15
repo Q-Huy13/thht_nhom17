@@ -2,7 +2,7 @@
 import logging, os, re, time, requests
 from flask import Flask, jsonify, render_template_string
 
-ACADEMIC_URL = "http://127.0.0.1:5001"   # nên đưa vào biến môi trường khi báo cáo (loose coupling)
+ACADEMIC_URL = "http://127.0.0.1:5001"   
 FINANCE_URL = "http://127.0.0.1:5002"
 TIMEOUT = 2  # giây
 ID_RE = re.compile(r"^SV\d{3}$")

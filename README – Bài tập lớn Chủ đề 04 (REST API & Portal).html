@@ -1,233 +1,535 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=claude:viewport-fit-sides content=cover><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}</style><style>.md-table{overflow-x:auto}@media print{.md-table{overflow-x:visible}}</style><style>:root{color-scheme:light dark;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}}:root[data-theme="dark"]{color-scheme:dark;--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}:root[data-theme="light"]{color-scheme:light}@media print{:root,:root[data-theme="dark"]{color-scheme:light;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}}body{background:var(--md-bg);color:var(--md-text);max-width:720px;margin:0 auto;padding:32px;display:flex;flex-direction:column;gap:10px;font:14px/1.55 -apple-system,BlinkMacSystemFont,'SF Pro','Segoe UI',sans-serif;overflow-wrap:break-word}body>:first-child{margin-top:0}h1,h2,h3,h4,h5,h6{margin:6px 0 0;line-height:1.25;font-weight:600;text-wrap:balance}h1{font-size:1.35em}h2{font-size:1.15em;color:var(--md-muted)}h3,h4,h5,h6{font-size:1em}p,ul,ol,blockquote,table,pre,hr{margin:0}strong{font-weight:600}a{color:var(--md-link);text-decoration:none}a:hover{text-decoration:underline}ul,ol{display:flex;flex-direction:column;gap:6px;padding-left:22px}ul{list-style:disc}ol{list-style:decimal}:is(li,td,th)>*+:is(p,ul,ol,blockquote){margin-top:6px}blockquote{display:flex;flex-direction:column;gap:10px;border-left:2px solid var(--md-rule);padding-left:10px;color:var(--md-muted)}:not(pre)>code{background:var(--md-fill);padding:1px 3px;border-radius:4px;font:.92em 'SF Mono',ui-monospace,Menlo,Consolas,monospace}a>code{background:none;color:inherit}pre{background:var(--md-fill);padding:10px 12px;border-radius:6px;overflow-x:auto;font:12px/1.5 'SF Mono',ui-monospace,Menlo,Consolas,monospace;margin-block:4px}pre code{background:none;padding:0;font:inherit}table{width:100%;border-collapse:separate;border-spacing:2px;font:inherit}th,td{padding:6px 8px;border-radius:3px;text-align:left;vertical-align:top}th{background:var(--md-fill-strong);font-weight:600}td{background:var(--md-fill)}:is(th,td) :not(pre)>code{background:transparent}hr{border:0;border-top:1px solid var(--md-rule-strong);margin-block:10px}img{max-width:100%;height:auto;border-radius:4px}</style>
-</head><body>
-<h1>BÀI TẬP LỚN – NHẬP MÔN TÍCH HỢP HỆ THỐNG</h1>
-<h2>Chủ đề 04: Tích hợp ứng dụng thông qua REST API và cổng thông tin Portal</h2>
-<blockquote>
-<p><strong>Dành cho cả 3 thành viên.</strong> Đọc mục 1–8 trước (khoảng 20 phút) để hiểu dự án và chạy được demo. Sau đó đọc kỹ <strong>mục 10 (phân công)</strong> để biết phần việc của mình. Mục 9 là <em>quy ước chung</em> mà cả nhóm phải thống nhất trong buổi họp đầu tiên.</p>
-</blockquote>
-<h2>Mục lục</h2>
-<ol>
-<li>Tổng quan dự án</li>
-<li>Đối chiếu yêu cầu của đề</li>
-<li>Kiến thức cần nắm</li>
-<li>Kiến trúc và luồng dữ liệu</li>
-<li>Hợp đồng API (ví dụ request/response)</li>
-<li>Cấu trúc thư mục</li>
-<li>Cài đặt và chạy lại demo</li>
-<li>Kịch bản và ma trận kiểm thử</li>
-<li>Quy ước chung của nhóm (mỗi người một máy)</li>
-<li>Phân công nhiệm vụ</li>
-<li>Cấu trúc báo cáo</li>
-<li>Lộ trình thực hiện</li>
-<li>Chuẩn bị thuyết trình và vấn đáp</li>
-<li>Checklist nộp bài</li>
-<li>Xử lý sự cố thường gặp</li>
-<li>Hạn chế và hướng mở rộng</li>
-<li>Công cụ AI đã sử dụng</li>
-</ol>
-<hr>
-<h2>1. Tổng quan dự án</h2>
-<p>Giả lập một trường đại học có <strong>hai hệ thống độc lập</strong>:</p>
-<ul>
-<li><strong>Academic</strong> – quản lý thông tin sinh viên (họ tên, ngành, email, GPA).</li>
-<li><strong>Finance</strong> – quản lý học phí (tổng phí, đã nộp, còn nợ).</li>
-</ul>
-<p>Hai hệ thống không biết gì về nhau và có dữ liệu riêng. Ta xây thêm <strong>Portal</strong>: người dùng nhập mã sinh viên, Portal gọi API của cả hai hệ thống rồi <strong>gộp kết quả</strong> hiển thị trên một trang. Nếu một hệ thống không phản hồi, Portal vẫn hiển thị phần còn lại kèm cảnh báo.</p>
-<p><strong>Ba thành phần, ba cổng</strong></p>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Thành phần</th>
-<th>Cổng</th>
-<th>Vai trò</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Portal</td>
-<td>5000</td>
-<td>Giao diện web + API tổng hợp</td>
-</tr>
-<tr>
-<td>Academic API</td>
-<td>5001</td>
-<td>Cung cấp thông tin sinh viên</td>
-</tr>
-<tr>
-<td>Finance API</td>
-<td>5002</td>
-<td>Cung cấp và tạo khoản học phí</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Công nghệ: Python, Flask (xây API), requests (Portal gọi API), Postman (trình diễn và kiểm thử). <strong>Toàn bộ dữ liệu là dữ liệu giả lập</strong>, không có thông tin cá nhân thật.</p>
-<hr>
-<h2>2. Đối chiếu yêu cầu của đề</h2>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Yêu cầu của đề</th>
-<th>Đáp ứng bằng</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Academic API cung cấp thông tin sinh viên</td>
-<td><code>academic_api.py</code></td>
-</tr>
-<tr>
-<td>Finance API cung cấp khoản học phí</td>
-<td><code>finance_api.py</code></td>
-</tr>
-<tr>
-<td>Portal đơn giản: nhập mã SV, lấy dữ liệu từ hai dịch vụ và hiển thị kết quả tổng hợp</td>
-<td><code>portal.py</code></td>
-</tr>
-<tr>
-<td>Kiểm tra đầu vào</td>
-<td>Regex <code>^SV\d{3}$</code>; kiểm tra body của POST</td>
-</tr>
-<tr>
-<td>Xử lý lỗi khi một API không phản hồi</td>
-<td>Timeout 2 giây, trả <code>partial</code> hoặc <code>503</code></td>
-</tr>
-<tr>
-<td>≥ 3 API endpoint chức năng rõ ràng</td>
-<td>5 endpoint nghiệp vụ + 2 endpoint <code>/health</code></td>
-</tr>
-<tr>
-<td>Postman: thành công / không tìm thấy / đầu vào không hợp lệ</td>
-<td>Postman Collection (mục 10)</td>
-</tr>
-<tr>
-<td>Sơ đồ luồng yêu cầu</td>
-<td>Sơ đồ tuần tự (mục 4)</td>
-</tr>
-<tr>
-<td>Ít nhất một tình huống lỗi được kiểm thử</td>
-<td>TC07, TC08 và các test bổ sung (mục 8)</td>
-</tr>
-<tr>
-<td>Báo cáo, mã nguồn, hướng dẫn chạy lại, bằng chứng kiểm thử</td>
-<td>Mục 11, 7, 8</td>
-</tr>
-<tr>
-<td>Dữ liệu giả lập, không dùng dữ liệu cá nhân thật</td>
-<td>10 sinh viên mẫu</td>
-</tr>
-<tr>
-<td>Nêu công cụ AI đã dùng</td>
-<td>Mục 17</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h2>3. Kiến thức cần nắm (mỗi người đều phải giải thích được)</h2>
-<ul>
-<li><strong>Application Interface Integration</strong>: các ứng dụng tích hợp với nhau qua <em>giao diện lập trình</em> (API) do mỗi ứng dụng công bố, không đụng vào bên trong nhau.</li>
-<li><strong>REST API</strong>: tài nguyên định danh bằng URL (<code>/api/students/SV001</code>), thao tác bằng HTTP method, dữ liệu trao đổi dạng <strong>JSON</strong>.</li>
-<li><strong>Endpoint, Request, Response</strong>: endpoint là địa chỉ của một chức năng; request gồm method, URL, header, body; response gồm mã trạng thái, header, body.</li>
-<li><strong>HTTP Methods</strong>: <code>GET</code> (đọc), <code>POST</code> (tạo mới); ngoài ra <code>PUT/PATCH</code> (sửa), <code>DELETE</code> (xoá).</li>
-<li><strong>Mã trạng thái</strong>:</li>
-</ul>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Mã</th>
-<th>Ý nghĩa</th>
-<th>Dùng trong demo khi</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td>OK</td>
-<td>Đọc dữ liệu thành công</td>
-</tr>
-<tr>
-<td>201</td>
-<td>Created</td>
-<td>POST tạo khoản phí thành công</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Bad Request</td>
-<td>Mã SV sai định dạng, body POST sai</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found</td>
-<td>Không có sinh viên / chưa có khoản phí</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable</td>
-<td>Portal không gọi được dịch vụ nào</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li><strong>Ba cách tích hợp cần phân biệt</strong> (đề yêu cầu rõ):</li>
-</ul>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Tiêu chí</th>
-<th>Truy cập trực tiếp CSDL</th>
-<th>Tích hợp qua API</th>
-<th>Tích hợp hiển thị tại Portal</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Cách làm</td>
-<td>A đọc thẳng bảng của B</td>
-<td>A gọi endpoint do B công bố</td>
-<td>Portal gom thông tin từ nhiều nguồn lên một giao diện</td>
-</tr>
-<tr>
-<td>Phụ thuộc</td>
-<td>Rất chặt vào cấu trúc bảng</td>
-<td>Chỉ phụ thuộc &quot;hợp đồng&quot; API</td>
-<td>Phụ thuộc cả API và cách hiển thị</td>
-</tr>
-<tr>
-<td>Khi B đổi schema</td>
-<td>A hỏng ngay</td>
-<td>A không ảnh hưởng nếu API giữ nguyên</td>
-<td>Tuỳ</td>
-</tr>
-<tr>
-<td>Kiểm soát quyền</td>
-<td>Khó</td>
-<td>Kiểm soát tại endpoint</td>
-<td>Tuỳ</td>
-</tr>
-</tbody>
-</table>
-</div>
-<blockquote>
-<p>Demo của ta là <strong>Portal gọi API</strong>, tức <em>kết hợp</em> cách 2 và cách 3. Phải nói rõ điều này khi thuyết trình.</p>
-</blockquote>
-<ul>
-<li><strong>Graceful degradation</strong> (giảm cấp êm): một dịch vụ chết thì Portal vẫn phục vụ phần còn lại, thay vì sập hoàn toàn.</li>
-<li><strong>Timeout</strong>: giới hạn thời gian chờ để Portal không bị treo khi dịch vụ chậm hoặc không phản hồi.</li>
-<li><strong>Coupling</strong>: mức độ phụ thuộc giữa các hệ thống. Địa chỉ dịch vụ gắn cứng trong mã là một dạng phụ thuộc chặt.</li>
-</ul>
-<hr>
-<h2>4. Kiến trúc và luồng dữ liệu</h2>
-<pre class="mermaid">flowchart LR
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="claude:viewport-fit-sides" content="cover" />
+    <style>
+      :root {
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-right: env(safe-area-inset-right, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        padding-left: env(safe-area-inset-left, 0px);
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+    </style>
+    <style>
+      .md-table {
+        overflow-x: auto;
+      }
+      @media print {
+        .md-table {
+          overflow-x: visible;
+        }
+      }
+    </style>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --md-bg: #fff;
+        --md-text: rgba(0, 0, 0, 0.8);
+        --md-muted: rgba(0, 0, 0, 0.6);
+        --md-fill: rgba(0, 0, 0, 0.04);
+        --md-fill-strong: rgba(0, 0, 0, 0.06);
+        --md-rule: rgba(0, 0, 0, 0.1);
+        --md-rule-strong: rgba(0, 0, 0, 0.16);
+        --md-link: hsl(210 100% 45%);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:where(:not([data-theme="light"])) {
+          --md-bg: #0d0d0d;
+          --md-text: rgba(255, 255, 255, 0.85);
+          --md-muted: rgba(255, 255, 255, 0.6);
+          --md-fill: rgba(255, 255, 255, 0.06);
+          --md-fill-strong: rgba(255, 255, 255, 0.09);
+          --md-rule: rgba(255, 255, 255, 0.14);
+          --md-rule-strong: rgba(255, 255, 255, 0.22);
+          --md-link: hsl(210 100% 72%);
+        }
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --md-bg: #0d0d0d;
+        --md-text: rgba(255, 255, 255, 0.85);
+        --md-muted: rgba(255, 255, 255, 0.6);
+        --md-fill: rgba(255, 255, 255, 0.06);
+        --md-fill-strong: rgba(255, 255, 255, 0.09);
+        --md-rule: rgba(255, 255, 255, 0.14);
+        --md-rule-strong: rgba(255, 255, 255, 0.22);
+        --md-link: hsl(210 100% 72%);
+      }
+      :root[data-theme="light"] {
+        color-scheme: light;
+      }
+      @media print {
+        :root,
+        :root[data-theme="dark"] {
+          color-scheme: light;
+          --md-bg: #fff;
+          --md-text: rgba(0, 0, 0, 0.8);
+          --md-muted: rgba(0, 0, 0, 0.6);
+          --md-fill: rgba(0, 0, 0, 0.04);
+          --md-fill-strong: rgba(0, 0, 0, 0.06);
+          --md-rule: rgba(0, 0, 0, 0.1);
+          --md-rule-strong: rgba(0, 0, 0, 0.16);
+          --md-link: hsl(210 100% 45%);
+        }
+      }
+      body {
+        background: var(--md-bg);
+        color: var(--md-text);
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font:
+          14px/1.55 -apple-system,
+          BlinkMacSystemFont,
+          "SF Pro",
+          "Segoe UI",
+          sans-serif;
+        overflow-wrap: break-word;
+      }
+      body > :first-child {
+        margin-top: 0;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 6px 0 0;
+        line-height: 1.25;
+        font-weight: 600;
+        text-wrap: balance;
+      }
+      h1 {
+        font-size: 1.35em;
+      }
+      h2 {
+        font-size: 1.15em;
+        color: var(--md-muted);
+      }
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-size: 1em;
+      }
+      p,
+      ul,
+      ol,
+      blockquote,
+      table,
+      pre,
+      hr {
+        margin: 0;
+      }
+      strong {
+        font-weight: 600;
+      }
+      a {
+        color: var(--md-link);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      ul,
+      ol {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-left: 22px;
+      }
+      ul {
+        list-style: disc;
+      }
+      ol {
+        list-style: decimal;
+      }
+      :is(li, td, th) > * + :is(p, ul, ol, blockquote) {
+        margin-top: 6px;
+      }
+      blockquote {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        border-left: 2px solid var(--md-rule);
+        padding-left: 10px;
+        color: var(--md-muted);
+      }
+      :not(pre) > code {
+        background: var(--md-fill);
+        padding: 1px 3px;
+        border-radius: 4px;
+        font:
+          0.92em "SF Mono",
+          ui-monospace,
+          Menlo,
+          Consolas,
+          monospace;
+      }
+      a > code {
+        background: none;
+        color: inherit;
+      }
+      pre {
+        background: var(--md-fill);
+        padding: 10px 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font:
+          12px/1.5 "SF Mono",
+          ui-monospace,
+          Menlo,
+          Consolas,
+          monospace;
+        margin-block: 4px;
+      }
+      pre code {
+        background: none;
+        padding: 0;
+        font: inherit;
+      }
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 2px;
+        font: inherit;
+      }
+      th,
+      td {
+        padding: 6px 8px;
+        border-radius: 3px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background: var(--md-fill-strong);
+        font-weight: 600;
+      }
+      td {
+        background: var(--md-fill);
+      }
+      :is(th, td) :not(pre) > code {
+        background: transparent;
+      }
+      hr {
+        border: 0;
+        border-top: 1px solid var(--md-rule-strong);
+        margin-block: 10px;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>BÀI TẬP LỚN – NHẬP MÔN TÍCH HỢP HỆ THỐNG</h1>
+    <h2>
+      Chủ đề 04: Tích hợp ứng dụng thông qua REST API và cổng thông tin Portal
+    </h2>
+    <blockquote>
+      <p>
+        <strong>Dành cho cả 3 thành viên.</strong> Đọc mục 1–8 trước (khoảng 20
+        phút) để hiểu dự án và chạy được demo. Sau đó đọc kỹ
+        <strong>mục 10 (phân công)</strong> để biết phần việc của mình. Mục 9 là
+        <em>quy ước chung</em> mà cả nhóm phải thống nhất trong buổi họp đầu
+        tiên.
+      </p>
+    </blockquote>
+    <h2>Mục lục</h2>
+    <ol>
+      <li>Tổng quan dự án</li>
+      <li>Đối chiếu yêu cầu của đề</li>
+      <li>Kiến thức cần nắm</li>
+      <li>Kiến trúc và luồng dữ liệu</li>
+      <li>Hợp đồng API (ví dụ request/response)</li>
+      <li>Cấu trúc thư mục</li>
+      <li>Cài đặt và chạy lại demo</li>
+      <li>Kịch bản và ma trận kiểm thử</li>
+      <li>Quy ước chung của nhóm (mỗi người một máy)</li>
+      <li>Phân công nhiệm vụ</li>
+      <li>Cấu trúc báo cáo</li>
+      <li>Lộ trình thực hiện</li>
+      <li>Chuẩn bị thuyết trình và vấn đáp</li>
+      <li>Checklist nộp bài</li>
+      <li>Xử lý sự cố thường gặp</li>
+      <li>Hạn chế và hướng mở rộng</li>
+      <li>Công cụ AI đã sử dụng</li>
+    </ol>
+    <hr />
+    <h2>1. Tổng quan dự án</h2>
+    <p>Giả lập một trường đại học có <strong>hai hệ thống độc lập</strong>:</p>
+    <ul>
+      <li>
+        <strong>Academic</strong> – quản lý thông tin sinh viên (họ tên, ngành,
+        email, GPA).
+      </li>
+      <li>
+        <strong>Finance</strong> – quản lý học phí (tổng phí, đã nộp, còn nợ).
+      </li>
+    </ul>
+    <p>
+      Hai hệ thống không biết gì về nhau và có dữ liệu riêng. Ta xây thêm
+      <strong>Portal</strong>: người dùng nhập mã sinh viên, Portal gọi API của
+      cả hai hệ thống rồi <strong>gộp kết quả</strong> hiển thị trên một trang.
+      Nếu một hệ thống không phản hồi, Portal vẫn hiển thị phần còn lại kèm cảnh
+      báo.
+    </p>
+    <p><strong>Ba thành phần, ba cổng</strong></p>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Thành phần</th>
+            <th>Cổng</th>
+            <th>Vai trò</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Portal</td>
+            <td>5000</td>
+            <td>Giao diện web + API tổng hợp</td>
+          </tr>
+          <tr>
+            <td>Academic API</td>
+            <td>5001</td>
+            <td>Cung cấp thông tin sinh viên</td>
+          </tr>
+          <tr>
+            <td>Finance API</td>
+            <td>5002</td>
+            <td>Cung cấp và tạo khoản học phí</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      Công nghệ: Python, Flask (xây API), requests (Portal gọi API), Postman
+      (trình diễn và kiểm thử).
+      <strong>Toàn bộ dữ liệu là dữ liệu giả lập</strong>, không có thông tin cá
+      nhân thật.
+    </p>
+    <hr />
+    <h2>2. Đối chiếu yêu cầu của đề</h2>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Yêu cầu của đề</th>
+            <th>Đáp ứng bằng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Academic API cung cấp thông tin sinh viên</td>
+            <td><code>academic_api.py</code></td>
+          </tr>
+          <tr>
+            <td>Finance API cung cấp khoản học phí</td>
+            <td><code>finance_api.py</code></td>
+          </tr>
+          <tr>
+            <td>
+              Portal đơn giản: nhập mã SV, lấy dữ liệu từ hai dịch vụ và hiển
+              thị kết quả tổng hợp
+            </td>
+            <td><code>portal.py</code></td>
+          </tr>
+          <tr>
+            <td>Kiểm tra đầu vào</td>
+            <td>Regex <code>^SV\d{3}$</code>; kiểm tra body của POST</td>
+          </tr>
+          <tr>
+            <td>Xử lý lỗi khi một API không phản hồi</td>
+            <td>
+              Timeout 2 giây, trả <code>partial</code> hoặc <code>503</code>
+            </td>
+          </tr>
+          <tr>
+            <td>≥ 3 API endpoint chức năng rõ ràng</td>
+            <td>5 endpoint nghiệp vụ + 2 endpoint <code>/health</code></td>
+          </tr>
+          <tr>
+            <td>Postman: thành công / không tìm thấy / đầu vào không hợp lệ</td>
+            <td>Postman Collection (mục 10)</td>
+          </tr>
+          <tr>
+            <td>Sơ đồ luồng yêu cầu</td>
+            <td>Sơ đồ tuần tự (mục 4)</td>
+          </tr>
+          <tr>
+            <td>Ít nhất một tình huống lỗi được kiểm thử</td>
+            <td>TC07, TC08 và các test bổ sung (mục 8)</td>
+          </tr>
+          <tr>
+            <td>Báo cáo, mã nguồn, hướng dẫn chạy lại, bằng chứng kiểm thử</td>
+            <td>Mục 11, 7, 8</td>
+          </tr>
+          <tr>
+            <td>Dữ liệu giả lập, không dùng dữ liệu cá nhân thật</td>
+            <td>10 sinh viên mẫu</td>
+          </tr>
+          <tr>
+            <td>Nêu công cụ AI đã dùng</td>
+            <td>Mục 17</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <h2>3. Kiến thức cần nắm (mỗi người đều phải giải thích được)</h2>
+    <ul>
+      <li>
+        <strong>Application Interface Integration</strong>: các ứng dụng tích
+        hợp với nhau qua <em>giao diện lập trình</em> (API) do mỗi ứng dụng công
+        bố, không đụng vào bên trong nhau.
+      </li>
+      <li>
+        <strong>REST API</strong>: tài nguyên định danh bằng URL
+        (<code>/api/students/SV001</code>), thao tác bằng HTTP method, dữ liệu
+        trao đổi dạng <strong>JSON</strong>.
+      </li>
+      <li>
+        <strong>Endpoint, Request, Response</strong>: endpoint là địa chỉ của
+        một chức năng; request gồm method, URL, header, body; response gồm mã
+        trạng thái, header, body.
+      </li>
+      <li>
+        <strong>HTTP Methods</strong>: <code>GET</code> (đọc),
+        <code>POST</code> (tạo mới); ngoài ra <code>PUT/PATCH</code> (sửa),
+        <code>DELETE</code> (xoá).
+      </li>
+      <li><strong>Mã trạng thái</strong>:</li>
+    </ul>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Mã</th>
+            <th>Ý nghĩa</th>
+            <th>Dùng trong demo khi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>200</td>
+            <td>OK</td>
+            <td>Đọc dữ liệu thành công</td>
+          </tr>
+          <tr>
+            <td>201</td>
+            <td>Created</td>
+            <td>POST tạo khoản phí thành công</td>
+          </tr>
+          <tr>
+            <td>400</td>
+            <td>Bad Request</td>
+            <td>Mã SV sai định dạng, body POST sai</td>
+          </tr>
+          <tr>
+            <td>404</td>
+            <td>Not Found</td>
+            <td>Không có sinh viên / chưa có khoản phí</td>
+          </tr>
+          <tr>
+            <td>503</td>
+            <td>Service Unavailable</td>
+            <td>Portal không gọi được dịch vụ nào</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li><strong>Ba cách tích hợp cần phân biệt</strong> (đề yêu cầu rõ):</li>
+    </ul>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Tiêu chí</th>
+            <th>Truy cập trực tiếp CSDL</th>
+            <th>Tích hợp qua API</th>
+            <th>Tích hợp hiển thị tại Portal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cách làm</td>
+            <td>A đọc thẳng bảng của B</td>
+            <td>A gọi endpoint do B công bố</td>
+            <td>Portal gom thông tin từ nhiều nguồn lên một giao diện</td>
+          </tr>
+          <tr>
+            <td>Phụ thuộc</td>
+            <td>Rất chặt vào cấu trúc bảng</td>
+            <td>Chỉ phụ thuộc &quot;hợp đồng&quot; API</td>
+            <td>Phụ thuộc cả API và cách hiển thị</td>
+          </tr>
+          <tr>
+            <td>Khi B đổi schema</td>
+            <td>A hỏng ngay</td>
+            <td>A không ảnh hưởng nếu API giữ nguyên</td>
+            <td>Tuỳ</td>
+          </tr>
+          <tr>
+            <td>Kiểm soát quyền</td>
+            <td>Khó</td>
+            <td>Kiểm soát tại endpoint</td>
+            <td>Tuỳ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote>
+      <p>
+        Demo của ta là <strong>Portal gọi API</strong>, tức
+        <em>kết hợp</em> cách 2 và cách 3. Phải nói rõ điều này khi thuyết
+        trình.
+      </p>
+    </blockquote>
+    <ul>
+      <li>
+        <strong>Graceful degradation</strong> (giảm cấp êm): một dịch vụ chết
+        thì Portal vẫn phục vụ phần còn lại, thay vì sập hoàn toàn.
+      </li>
+      <li>
+        <strong>Timeout</strong>: giới hạn thời gian chờ để Portal không bị treo
+        khi dịch vụ chậm hoặc không phản hồi.
+      </li>
+      <li>
+        <strong>Coupling</strong>: mức độ phụ thuộc giữa các hệ thống. Địa chỉ
+        dịch vụ gắn cứng trong mã là một dạng phụ thuộc chặt.
+      </li>
+    </ul>
+    <hr />
+    <h2>4. Kiến trúc và luồng dữ liệu</h2>
+    <pre class="mermaid">
+flowchart LR
     U[Người dùng&lt;br/&gt;Trình duyệt / Postman] --&gt;|GET /api/portal/SV001| P[Portal :5000]
     P --&gt;|GET /api/students/SV001| A[Academic API :5001]
     P --&gt;|GET /api/fees/SV001| F[Finance API :5002]
     A --&gt; P
     F --&gt; P
     P --&gt;|JSON gộp| U
-</pre>
-<pre class="mermaid">sequenceDiagram
+</pre
+    >
+    <pre class="mermaid">
+sequenceDiagram
     participant U as Người dùng
     participant P as Portal
     participant A as Academic API
@@ -243,86 +545,98 @@
     else Finance không phản hồi (timeout 2s)
         P--&gt;&gt;U: 200 {status: partial, warnings}
     end
-</pre>
-<p><strong>Các kịch bản của Portal</strong></p>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Tình huống</th>
-<th>Portal trả về</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mã SV sai định dạng (<code>abc</code>)</td>
-<td><code>400 INVALID_ID</code> (không gọi API nào)</td>
-</tr>
-<tr>
-<td>Không có sinh viên</td>
-<td><code>404 NOT_FOUND</code></td>
-</tr>
-<tr>
-<td>Có sinh viên + có học phí</td>
-<td><code>200</code>, <code>status: ok</code></td>
-</tr>
-<tr>
-<td>Có sinh viên, chưa có học phí (vd <code>SV008</code>)</td>
-<td><code>200</code>, <code>status: partial</code> + cảnh báo</td>
-</tr>
-<tr>
-<td>Finance sập</td>
-<td><code>200</code>, <code>status: partial</code>, vẫn có thông tin SV</td>
-</tr>
-<tr>
-<td>Academic sập (Finance còn)</td>
-<td><code>200</code>, <code>status: partial</code>, chỉ có học phí</td>
-</tr>
-<tr>
-<td>Cả hai sập</td>
-<td><code>503 ALL_DOWN</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h2>5. Hợp đồng API</h2>
-<blockquote>
-<p><strong>Đây là &quot;hợp đồng&quot; chung của cả nhóm.</strong> Ai muốn đổi URL, tên trường JSON hoặc mã lỗi phải báo cả nhóm và ghi vào <code>CHANGELOG.md</code> (xem mục 9).</p>
-</blockquote>
-<h3>5.1 Academic API (5001)</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Method</th>
-<th>URL</th>
-<th>Mô tả</th>
-<th>Mã trả về</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GET</td>
-<td><code>/health</code></td>
-<td>Kiểm tra dịch vụ còn sống</td>
-<td>200</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/students</code></td>
-<td>Danh sách sinh viên</td>
-<td>200</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/students/{id}</code></td>
-<td>Chi tiết một sinh viên</td>
-<td>200, 400, 404</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code>GET /api/students/SV001</code> → <code>200</code></p>
-<pre><code class="language-json">{
+</pre
+    >
+    <p><strong>Các kịch bản của Portal</strong></p>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Tình huống</th>
+            <th>Portal trả về</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mã SV sai định dạng (<code>abc</code>)</td>
+            <td><code>400 INVALID_ID</code> (không gọi API nào)</td>
+          </tr>
+          <tr>
+            <td>Không có sinh viên</td>
+            <td><code>404 NOT_FOUND</code></td>
+          </tr>
+          <tr>
+            <td>Có sinh viên + có học phí</td>
+            <td><code>200</code>, <code>status: ok</code></td>
+          </tr>
+          <tr>
+            <td>Có sinh viên, chưa có học phí (vd <code>SV008</code>)</td>
+            <td><code>200</code>, <code>status: partial</code> + cảnh báo</td>
+          </tr>
+          <tr>
+            <td>Finance sập</td>
+            <td>
+              <code>200</code>, <code>status: partial</code>, vẫn có thông tin
+              SV
+            </td>
+          </tr>
+          <tr>
+            <td>Academic sập (Finance còn)</td>
+            <td>
+              <code>200</code>, <code>status: partial</code>, chỉ có học phí
+            </td>
+          </tr>
+          <tr>
+            <td>Cả hai sập</td>
+            <td><code>503 ALL_DOWN</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <h2>5. Hợp đồng API</h2>
+    <blockquote>
+      <p>
+        <strong>Đây là &quot;hợp đồng&quot; chung của cả nhóm.</strong> Ai muốn
+        đổi URL, tên trường JSON hoặc mã lỗi phải báo cả nhóm và ghi vào
+        <code>CHANGELOG.md</code> (xem mục 9).
+      </p>
+    </blockquote>
+    <h3>5.1 Academic API (5001)</h3>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>URL</th>
+            <th>Mô tả</th>
+            <th>Mã trả về</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GET</td>
+            <td><code>/health</code></td>
+            <td>Kiểm tra dịch vụ còn sống</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td><code>/api/students</code></td>
+            <td>Danh sách sinh viên</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td><code>/api/students/{id}</code></td>
+            <td>Chi tiết một sinh viên</td>
+            <td>200, 400, 404</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>GET /api/students/SV001</code> → <code>200</code></p>
+    <pre><code class="language-json">{
   &#34;student_id&#34;: &#34;SV001&#34;,
   &#34;full_name&#34;: &#34;Nguyễn Văn An&#34;,
   &#34;major&#34;: &#34;Công nghệ thông tin&#34;,
@@ -330,40 +644,41 @@
   &#34;gpa&#34;: 3.2
 }
 </code></pre>
-<h3>5.2 Finance API (5002)</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Method</th>
-<th>URL</th>
-<th>Mô tả</th>
-<th>Mã trả về</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GET</td>
-<td><code>/health</code></td>
-<td>Kiểm tra dịch vụ còn sống</td>
-<td>200</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/fees/{id}</code></td>
-<td>Học phí của sinh viên</td>
-<td>200, 400, 404</td>
-</tr>
-<tr>
-<td>POST</td>
-<td><code>/api/fees/{id}</code></td>
-<td>Tạo khoản học phí mới</td>
-<td>201, 400</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code>GET /api/fees/SV002</code> → <code>200</code></p>
-<pre><code class="language-json">{
+    <h3>5.2 Finance API (5002)</h3>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>URL</th>
+            <th>Mô tả</th>
+            <th>Mã trả về</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GET</td>
+            <td><code>/health</code></td>
+            <td>Kiểm tra dịch vụ còn sống</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td><code>/api/fees/{id}</code></td>
+            <td>Học phí của sinh viên</td>
+            <td>200, 400, 404</td>
+          </tr>
+          <tr>
+            <td>POST</td>
+            <td><code>/api/fees/{id}</code></td>
+            <td>Tạo khoản học phí mới</td>
+            <td>201, 400</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>GET /api/fees/SV002</code> → <code>200</code></p>
+    <pre><code class="language-json">{
   &#34;student_id&#34;: &#34;SV002&#34;,
   &#34;fees&#34;: [
     {&#34;fee_id&#34;: &#34;F002&#34;, &#34;term&#34;: &#34;HK1-2026&#34;, &#34;amount&#34;: 12500000, &#34;paid&#34;: 5000000}
@@ -373,54 +688,71 @@
   &#34;balance&#34;: 7500000
 }
 </code></pre>
-<p><code>POST /api/fees/SV006</code> với body <code>{&quot;term&quot;: &quot;HK1-2026&quot;, &quot;amount&quot;: 9000000}</code> → <code>201</code> (trả về khoản phí vừa tạo).
-Body sai (thiếu <code>term</code> hoặc <code>amount &lt;= 0</code>) → <code>400 INVALID_BODY</code>.</p>
-<h3>5.3 Portal (5000)</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Method</th>
-<th>URL</th>
-<th>Mô tả</th>
-<th>Mã trả về</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GET</td>
-<td><code>/</code></td>
-<td>Giao diện web tra cứu</td>
-<td>200</td>
-</tr>
-<tr>
-<td>GET</td>
-<td><code>/api/portal/{id}</code></td>
-<td>Gộp dữ liệu hai dịch vụ</td>
-<td>200, 400, 404, 503</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><code>GET /api/portal/SV001</code> khi Finance sập → <code>200</code></p>
-<pre><code class="language-json">{
+    <p>
+      <code>POST /api/fees/SV006</code> với body
+      <code
+        >{&quot;term&quot;: &quot;HK1-2026&quot;, &quot;amount&quot;:
+        9000000}</code
+      >
+      → <code>201</code> (trả về khoản phí vừa tạo). Body sai (thiếu
+      <code>term</code> hoặc <code>amount &lt;= 0</code>) →
+      <code>400 INVALID_BODY</code>.
+    </p>
+    <h3>5.3 Portal (5000)</h3>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>URL</th>
+            <th>Mô tả</th>
+            <th>Mã trả về</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GET</td>
+            <td><code>/</code></td>
+            <td>Giao diện web tra cứu</td>
+            <td>200</td>
+          </tr>
+          <tr>
+            <td>GET</td>
+            <td><code>/api/portal/{id}</code></td>
+            <td>Gộp dữ liệu hai dịch vụ</td>
+            <td>200, 400, 404, 503</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p><code>GET /api/portal/SV001</code> khi Finance sập → <code>200</code></p>
+    <pre><code class="language-json">{
   &#34;status&#34;: &#34;partial&#34;,
   &#34;student&#34;: {&#34;student_id&#34;: &#34;SV001&#34;, &#34;full_name&#34;: &#34;Nguyễn Văn An&#34;, &#34;...&#34;: &#34;...&#34;},
   &#34;finance&#34;: null,
   &#34;warnings&#34;: [&#34;Không lấy được học phí (Finance)&#34;]
 }
 </code></pre>
-<h3>5.4 Định dạng lỗi chung</h3>
-<pre><code class="language-json">{&#34;error&#34;: &#34;NOT_FOUND&#34;, &#34;message&#34;: &#34;Không có sinh viên SV999&#34;}
+    <h3>5.4 Định dạng lỗi chung</h3>
+    <pre><code class="language-json">{&#34;error&#34;: &#34;NOT_FOUND&#34;, &#34;message&#34;: &#34;Không có sinh viên SV999&#34;}
 </code></pre>
-<p>Các giá trị <code>error</code>: <code>INVALID_ID</code>, <code>NOT_FOUND</code>, <code>INVALID_BODY</code>, <code>ALL_DOWN</code>, <code>SERVICE_UNAVAILABLE</code>.</p>
-<h3>5.5 Dữ liệu mẫu</h3>
-<ul>
-<li>Academic: 10 sinh viên <code>SV001</code>–<code>SV010</code>.</li>
-<li>Finance: có học phí cho <code>SV001</code>–<code>SV005</code>. Dùng <code>SV008</code> để thử trường hợp &quot;có sinh viên nhưng chưa có phí&quot;.</li>
-</ul>
-<hr>
-<h2>6. Cấu trúc thư mục</h2>
-<pre><code>bt04/
+    <p>
+      Các giá trị <code>error</code>: <code>INVALID_ID</code>,
+      <code>NOT_FOUND</code>, <code>INVALID_BODY</code>, <code>ALL_DOWN</code>,
+      <code>SERVICE_UNAVAILABLE</code>.
+    </p>
+    <h3>5.5 Dữ liệu mẫu</h3>
+    <ul>
+      <li>Academic: 10 sinh viên <code>SV001</code>–<code>SV010</code>.</li>
+      <li>
+        Finance: có học phí cho <code>SV001</code>–<code>SV005</code>. Dùng
+        <code>SV008</code> để thử trường hợp &quot;có sinh viên nhưng chưa có
+        phí&quot;.
+      </li>
+    </ul>
+    <hr />
+    <h2>6. Cấu trúc thư mục</h2>
+    <pre><code>bt04/
 ├── academic_api.py     # Academic API (5001)
 ├── finance_api.py      # Finance API (5002)
 ├── portal.py           # Portal: backend gộp dữ liệu + giao diện web (5000)
@@ -434,576 +766,971 @@ Body sai (thiếu <code>term</code> hoặc <code>amount &lt;= 0</code>) → <cod
 ├── postman/            # (tự tạo) Postman Collection (.json)
 └── evidence/           # (tự tạo) ảnh chụp, log minh chứng
 </code></pre>
-<hr>
-<h2>7. Cài đặt và chạy lại demo</h2>
-<p><strong>Yêu cầu:</strong> Python 3.10 trở lên (cả nhóm dùng cùng bản, xem mục 9).</p>
-<h3>7.1 Cài đặt (làm một lần, dùng virtual environment)</h3>
-<p>Windows:</p>
-<pre><code class="language-bash">python -m venv venv
+    <hr />
+    <h2>7. Cài đặt và chạy lại demo</h2>
+    <p>
+      <strong>Yêu cầu:</strong> Python 3.10 trở lên (cả nhóm dùng cùng bản, xem
+      mục 9).
+    </p>
+    <h3>7.1 Cài đặt (làm một lần, dùng virtual environment)</h3>
+    <p>Windows:</p>
+    <pre><code class="language-bash">python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 </code></pre>
-<p>macOS / Linux:</p>
-<pre><code class="language-bash">python3 -m venv venv
+    <p>macOS / Linux:</p>
+    <pre><code class="language-bash">python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 </code></pre>
-<h3>7.2 Chạy demo</h3>
-<p>Mở <strong>3 terminal</strong>, mỗi terminal đều đã kích hoạt venv và đứng trong thư mục <code>bt04</code>:</p>
-<pre><code class="language-bash">python academic_api.py   # terminal 1 – cổng 5001
+    <h3>7.2 Chạy demo</h3>
+    <p>
+      Mở <strong>3 terminal</strong>, mỗi terminal đều đã kích hoạt venv và đứng
+      trong thư mục <code>bt04</code>:
+    </p>
+    <pre><code class="language-bash">python academic_api.py   # terminal 1 – cổng 5001
 python finance_api.py    # terminal 2 – cổng 5002
 python portal.py         # terminal 3 – cổng 5000
 </code></pre>
-<p>(macOS/Linux dùng <code>python3</code> nếu <code>python</code> không có.)</p>
-<p>Mở trình duyệt: <code>http://127.0.0.1:5000</code> và nhập thử <code>SV001</code>, <code>SV999</code>, <code>abc</code>, <code>SV008</code>.</p>
-<p>Thử bằng dòng lệnh:</p>
-<pre><code class="language-bash">curl http://127.0.0.1:5000/api/portal/SV002     # thành công
+    <p>
+      (macOS/Linux dùng <code>python3</code> nếu <code>python</code> không có.)
+    </p>
+    <p>
+      Mở trình duyệt: <code>http://127.0.0.1:5000</code> và nhập thử
+      <code>SV001</code>, <code>SV999</code>, <code>abc</code>,
+      <code>SV008</code>.
+    </p>
+    <p>Thử bằng dòng lệnh:</p>
+    <pre><code class="language-bash">curl http://127.0.0.1:5000/api/portal/SV002     # thành công
 curl http://127.0.0.1:5000/api/portal/SV999     # 404
 curl http://127.0.0.1:5000/api/portal/abc       # 400
 </code></pre>
-<h3>7.3 Thử tình huống lỗi</h3>
-<p>Tắt terminal 2 (Finance) rồi gọi lại <code>/api/portal/SV001</code> → thấy <code>status: partial</code>. Mở <code>logs/portal.log</code> để thấy dòng ghi lỗi kết nối.</p>
-<h3>7.4 Chạy kiểm thử tự động</h3>
-<pre><code class="language-bash">python test_demo.py     # tự bật/tắt 3 dịch vụ; kỳ vọng: 8/8 test đạt
+    <h3>7.3 Thử tình huống lỗi</h3>
+    <p>
+      Tắt terminal 2 (Finance) rồi gọi lại <code>/api/portal/SV001</code> → thấy
+      <code>status: partial</code>. Mở <code>logs/portal.log</code> để thấy dòng
+      ghi lỗi kết nối.
+    </p>
+    <h3>7.4 Chạy kiểm thử tự động</h3>
+    <pre><code class="language-bash">python test_demo.py     # tự bật/tắt 3 dịch vụ; kỳ vọng: 8/8 test đạt
 </code></pre>
-<p>Lưu ý: dừng các dịch vụ đang chạy tay (7.2) trước khi chạy test, vì test dùng cùng các cổng.</p>
-<hr>
-<h2>8. Kịch bản và ma trận kiểm thử</h2>
-<h3>8.1 Test tự động hiện có (<code>test_demo.py</code>)</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Mã</th>
-<th>Mô tả</th>
-<th>Kết quả mong đợi</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>TC01</td>
-<td><code>GET /api/portal/SV002</code></td>
-<td>200, <code>status: ok</code></td>
-</tr>
-<tr>
-<td>TC02</td>
-<td><code>GET /api/portal/SV999</code></td>
-<td>404</td>
-</tr>
-<tr>
-<td>TC03</td>
-<td><code>GET /api/portal/abc</code></td>
-<td>400</td>
-</tr>
-<tr>
-<td>TC04</td>
-<td><code>GET /api/portal/SV008</code> (có SV, chưa có phí)</td>
-<td>200, <code>status: partial</code></td>
-</tr>
-<tr>
-<td>TC05</td>
-<td><code>POST /api/fees/SV006</code> body hợp lệ</td>
-<td>201</td>
-</tr>
-<tr>
-<td>TC06</td>
-<td><code>POST /api/fees/SV006</code> body sai</td>
-<td>400</td>
-</tr>
-<tr>
-<td>TC07</td>
-<td>Tắt Finance, gọi <code>SV001</code></td>
-<td>200, <code>partial</code>, vẫn có thông tin SV</td>
-</tr>
-<tr>
-<td>TC08</td>
-<td>Tắt cả Academic và Finance</td>
-<td>503</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3>8.2 Test nên bổ sung</h3>
-<ul>
-<li>Academic sập, Finance còn → <code>partial</code>, chỉ có học phí.</li>
-<li>Finance <strong>chậm</strong> hơn timeout (dùng tham số <code>?delay=</code> do A thêm) → Portal không treo, trả <code>partial</code>.</li>
-<li>Kiểm tra các khoản phí POST rồi GET lại thấy khoản mới.</li>
-<li>Các mã SV biên: <code>SV000</code>, <code>SV1</code>, <code>sv001</code> (chữ thường), chuỗi rỗng, ký tự đặc biệt.</li>
-</ul>
-<h3>8.3 Mẫu ma trận kiểm thử cho báo cáo</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Mã TC</th>
-<th>Mô tả</th>
-<th>Đầu vào</th>
-<th>Kết quả mong đợi</th>
-<th>Kết quả thực tế</th>
-<th>Đạt/Không</th>
-<th>Minh chứng</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>TC01</td>
-<td>Tra cứu thành công</td>
-<td><code>SV002</code></td>
-<td>200, ok</td>
-<td></td>
-<td></td>
-<td><code>evidence/TC01_*.png</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3>8.4 Danh sách request Postman cần có</h3>
-<p><code>SV002 → 200</code>, <code>SV999 → 404</code>, <code>abc → 400</code>, <code>SV008 → partial</code>, <code>POST fees → 201</code>, <code>POST body sai → 400</code>, và kịch bản Finance sập. Xuất Collection ra <code>postman/</code> dưới dạng JSON.</p>
-<hr>
-<h2>9. Quy ước chung của nhóm (mỗi người một máy)</h2>
-<p><strong>Họp đầu tiên phải chốt các mục dưới đây.</strong></p>
-<h3>9.1 Môi trường</h3>
-<ul>
-<li><input disabled="" type="checkbox"> Cùng phiên bản Python (đề xuất 3.10 hoặc 3.11). Ghi phiên bản đã chọn: <code>________</code></li>
-<li><input disabled="" type="checkbox"> Luôn cài thư viện bằng <code>requirements.txt</code> trong virtual environment (mục 7.1).</li>
-<li><input disabled="" type="checkbox"> Giữ nguyên cổng 5000, 5001, 5002. Nếu cổng bị trùng trên máy ai thì báo nhóm, không tự sửa cứng.</li>
-<li><input disabled="" type="checkbox"> Không dùng lệnh riêng của một hệ điều hành trong tài liệu và mã (tránh <code>mkdir -p</code>, đường dẫn kiểu <code>C:\...</code>).</li>
-</ul>
-<h3>9.2 Hợp đồng API</h3>
-<ul>
-<li><input disabled="" type="checkbox"> Mục 5 là chuẩn chung. Muốn đổi URL, tên trường JSON hay mã lỗi → báo nhóm <strong>trước khi</strong> đổi và ghi vào <code>CHANGELOG.md</code>.</li>
-<li><input disabled="" type="checkbox"> Người đổi API chịu trách nhiệm cập nhật Postman và báo người phụ thuộc (A → B, C).</li>
-</ul>
-<h3>9.3 Quy trình làm việc</h3>
-<ul>
-<li><input disabled="" type="checkbox"> <strong>Một người giữ bản chính</strong> (đề xuất C) và chịu trách nhiệm ghép. Người khác gửi file đã sửa cho người này.</li>
-<li><input disabled="" type="checkbox"> Mỗi người <strong>chỉ sửa file thuộc phần mình</strong> (mục 10). Cần sửa file của người khác thì nhắn trước.</li>
-<li><input disabled="" type="checkbox"> Nếu gửi zip: đặt tên có ngày giờ, ví dụ <code>bt04_v3_1211.zip</code>.</li>
-<li><input disabled="" type="checkbox"> Họp tối thiểu <strong>1 lần mỗi tuần</strong>; đầu buổi mỗi người báo: đã xong gì, đang vướng gì, có đổi gì ở API không.</li>
-<li><input disabled="" type="checkbox"> <strong>Git là tuỳ chọn.</strong> Đề không bắt buộc. Nếu dùng: mỗi người một nhánh <code>feature/a-...</code>, <code>feature/b-...</code>, <code>feature/c-...</code>; trước khi làm <code>git pull</code>, làm xong <code>git add .</code>, <code>git commit -m &quot;...&quot;</code>, <code>git push</code>. Nếu không dùng: dùng một thư mục chung trên Drive/OneDrive và tuân thủ quy tắc &quot;mỗi người một file&quot; ở trên.</li>
-</ul>
-<h3>9.4 Chuẩn bằng chứng và tài liệu</h3>
-<ul>
-<li><input disabled="" type="checkbox"> Ảnh chụp, log, file Postman lưu ở <code>evidence/</code> và <code>postman/</code>. Đặt tên có quy tắc: <code>TC01_thanhcong.png</code>, <code>TC07_financedown.png</code>.</li>
-<li><input disabled="" type="checkbox"> Dùng một mẫu ma trận kiểm thử duy nhất (mục 8.3).</li>
-<li><input disabled="" type="checkbox"> Báo cáo viết chung trên một nơi (Google Docs hoặc OneDrive Word) để cùng chỉnh sửa mà không phải ghép nhiều file.</li>
-</ul>
-<h3>9.5 Kiểm thử chéo</h3>
-<ul>
-<li><input disabled="" type="checkbox"> Sau mỗi thay đổi lớn, <strong>ít nhất một người khác</strong> tải bản mới về và chạy <code>python test_demo.py</code> trên máy mình. Đạt 8/8 mới coi là xong.</li>
-<li><input disabled="" type="checkbox"> Tuần cuối: chạy lại <strong>từ đầu trên một máy sạch</strong> (hoặc máy của người chưa từng chạy) theo đúng README.</li>
-</ul>
-<hr>
-<h2>10. Phân công nhiệm vụ</h2>
-<blockquote>
-<p>Mã nguồn nền đã có sẵn. <strong>Mỗi người phải chạy được toàn bộ demo trước</strong>, rồi mới làm phần của mình. Phần &quot;Nâng cấp&quot; là nơi lấy điểm cao ở tiêu chí <em>Demo (35%)</em> và <em>Thiết kế (15%)</em>. Mỗi người tự viết phần báo cáo về phần mình làm để khi vấn đáp trả lời được tự nhiên.</p>
-</blockquote>
-<h3>Tổng quan phân công</h3>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th></th>
-<th><strong>A</strong></th>
-<th><strong>B</strong></th>
-<th><strong>C</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Code</td>
-<td>Academic + Finance</td>
-<td>Portal</td>
-<td>Mở rộng <code>test_demo.py</code></td>
-</tr>
-<tr>
-<td>Postman</td>
-<td>Academic + Finance</td>
-<td>Portal + kịch bản lỗi</td>
-<td>Tổng hợp, kiểm tra chéo</td>
-</tr>
-<tr>
-<td>Sơ đồ</td>
-<td>Sơ đồ kiến trúc</td>
-<td>Sơ đồ tuần tự (3 luồng)</td>
-<td>Bảng so sánh 3 cách tích hợp</td>
-</tr>
-<tr>
-<td>Báo cáo</td>
-<td>Thiết kế API + cài đặt Academic/Finance</td>
-<td>Cài đặt Portal + xử lý lỗi + hướng dẫn chạy</td>
-<td>Chương 1, 2, 3, 8 + <strong>ghép toàn bộ</strong></td>
-</tr>
-<tr>
-<td>Khác</td>
-<td></td>
-<td></td>
-<td>Slide, mục công cụ AI, rà checklist</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3>👤 Thành viên A – Backend dữ liệu (Academic + Finance)</h3>
-<p><strong>File phụ trách:</strong> <code>academic_api.py</code>, <code>finance_api.py</code></p>
-<p><strong>Bắt buộc</strong></p>
-<ul>
-<li><input disabled="" type="checkbox"> Giải thích được từng endpoint và từng nhánh trả 400/404/201.</li>
-<li><input disabled="" type="checkbox"> Rà dữ liệu giả lập: đủ 10 sinh viên, hợp lý, không dùng dữ liệu thật.</li>
-<li><input disabled="" type="checkbox"> Viết <strong>bảng mô tả API</strong> (endpoint, method, tham số, ví dụ request/response, mã lỗi) cho báo cáo.</li>
-<li><input disabled="" type="checkbox"> Tạo <strong>Postman Collection cho Academic và Finance</strong> (200, 400, 404, 201) và chụp ảnh vào <code>evidence/</code>.</li>
-<li><input disabled="" type="checkbox"> Vẽ <strong>sơ đồ kiến trúc</strong> (có thể dựa trên sơ đồ ở mục 4, vẽ lại bằng draw.io hoặc PlantUML).</li>
-<li><input disabled="" type="checkbox"> Viết chương <em>Thiết kế API</em> và <em>Cài đặt Academic/Finance</em> trong báo cáo.</li>
-</ul>
-<p><strong>Nâng cấp (nên làm ≥ 2)</strong></p>
-<ul>
-<li><input disabled="" type="checkbox"> Thêm tiền tố <code>/api/v1/...</code> (báo B và C ngay khi đổi).</li>
-<li><input disabled="" type="checkbox"> Viết <code>openapi.yaml</code> mô tả Academic và Finance.</li>
-<li><input disabled="" type="checkbox"> Thêm <code>PUT</code> hoặc <code>DELETE</code> cho khoản học phí.</li>
-<li><input disabled="" type="checkbox"> Thêm tham số <code>?delay=3</code> cho Finance để giả lập chậm (phục vụ test timeout của B).</li>
-</ul>
-<p><strong>Phải giải thích được khi vấn đáp</strong></p>
-<ul>
-<li>Vì sao Finance không đọc chung CSDL với Academic mà phải qua API?</li>
-<li>Vì sao sai định dạng trả 400 còn không tồn tại trả 404?</li>
-<li>Vì sao POST thành công trả 201 chứ không phải 200?</li>
-</ul>
-<h3>👤 Thành viên B – Portal và xử lý lỗi</h3>
-<p><strong>File phụ trách:</strong> <code>portal.py</code></p>
-<p><strong>Bắt buộc</strong></p>
-<ul>
-<li><input disabled="" type="checkbox"> Giải thích được hàm <code>call()</code> (timeout, bắt lỗi, ghi log) và logic <code>partial</code> / <code>ALL_DOWN</code>.</li>
-<li><input disabled="" type="checkbox"> Tạo <strong>Postman Collection cho Portal và các kịch bản lỗi</strong> (Finance sập, Academic sập, cả hai sập, timeout).</li>
-<li><input disabled="" type="checkbox"> Chụp ảnh giao diện web ở các trường hợp: thành công, 404, 400, Finance sập.</li>
-<li><input disabled="" type="checkbox"> Chọn các dòng <code>logs/portal.log</code> làm minh chứng cho từng tình huống.</li>
-<li><input disabled="" type="checkbox"> Vẽ <strong>sơ đồ tuần tự</strong> cho 3 luồng: thành công, một API lỗi, không tìm thấy.</li>
-<li><input disabled="" type="checkbox"> Viết chương <em>Cài đặt Portal và xử lý lỗi</em> và <em>Hướng dẫn cài đặt, chạy lại</em> trong báo cáo.</li>
-</ul>
-<p><strong>Nâng cấp (nên làm ≥ 2)</strong></p>
-<ul>
-<li><input disabled="" type="checkbox"> Đưa <code>ACADEMIC_URL</code>, <code>FINANCE_URL</code>, <code>TIMEOUT</code> ra <strong>biến môi trường</strong> (<code>os.environ.get</code>).</li>
-<li><input disabled="" type="checkbox"> Gọi hai API <strong>song song</strong> (<code>concurrent.futures.ThreadPoolExecutor</code>) và đo thời gian so với tuần tự.</li>
-<li><input disabled="" type="checkbox"> Thử độ trễ bằng <code>?delay=</code> của A để chứng minh Portal không treo khi vượt timeout.</li>
-<li><input disabled="" type="checkbox"> Thêm <strong>retry</strong> đơn giản (tối đa 1–2 lần) cho lỗi tạm thời.</li>
-</ul>
-<p><strong>Phải giải thích được khi vấn đáp</strong></p>
-<ul>
-<li>Portal có phải điểm lỗi tập trung không? Giảm rủi ro thế nào?</li>
-<li>Vì sao trả <code>partial</code> thay vì báo lỗi hoàn toàn khi Finance sập?</li>
-<li>Khi nào dùng 502/504 thay cho 503?</li>
-<li>Gọi tuần tự và song song khác nhau gì về thời gian phản hồi?</li>
-</ul>
-<h3>👤 Thành viên C – Tổng hợp, kiểm thử, báo cáo</h3>
-<p><strong>Phụ trách:</strong> <code>docs/</code>, <code>test_demo.py</code>, ma trận kiểm thử, báo cáo tổng, slide</p>
-<p><strong>Bắt buộc</strong></p>
-<ul>
-<li><input disabled="" type="checkbox"> Viết chương 1 (giới thiệu), 2 (cơ sở lý thuyết), 3 (so sánh ba cách tích hợp), 8 (nhận xét, hạn chế).</li>
-<li><input disabled="" type="checkbox"> Lập <strong>ma trận kiểm thử</strong> tổng hợp theo mẫu mục 8.3, đối chiếu với ảnh minh chứng của A và B.</li>
-<li><input disabled="" type="checkbox"> Mở rộng <code>test_demo.py</code> (test Academic sập, test timeout, test POST rồi GET lại).</li>
-<li><input disabled="" type="checkbox"> <strong>Giữ bản chính</strong> và ghép báo cáo, kiểm tra thống nhất về định dạng.</li>
-<li><input disabled="" type="checkbox"> Làm slide thuyết trình; viết mục <em>Công cụ AI đã sử dụng</em>.</li>
-<li><input disabled="" type="checkbox"> Rà checklist nộp bài (mục 14) trước khi nộp.</li>
-</ul>
-<p><strong>Nâng cấp (nên làm ≥ 1)</strong></p>
-<ul>
-<li><input disabled="" type="checkbox"> Làm bảng so sánh ba cách tích hợp kèm ví dụ minh hoạ bằng chính demo.</li>
-<li><input disabled="" type="checkbox"> Đo và trình bày bảng so sánh thời gian phản hồi (tuần tự/song song, bình thường/chậm).</li>
-</ul>
-<p><strong>Phải giải thích được khi vấn đáp</strong></p>
-<ul>
-<li>Mỗi test case kiểm tra điều gì và vì sao quan trọng?</li>
-<li>Luồng một request đi qua các thành phần nào, theo thứ tự nào?</li>
-<li>Demo còn thiếu gì so với hệ thống thực tế?</li>
-</ul>
-<h3>🤝 Việc chung</h3>
-<ul>
-<li>Mỗi người chạy được cả 3 dịch vụ và <code>test_demo.py</code> <strong>trên máy của mình</strong>.</li>
-<li><strong>Tuần cuối dành riêng cho hỏi chéo</strong>: A hỏi phần B, B hỏi phần C, C hỏi phần A. Đề chấm từng cá nhân.</li>
-<li>Nếu năng lực code lệch nhau: người yếu code nhận nhiều phần sơ đồ, Postman và báo cáo hơn, nhưng vẫn phải chạy được toàn bộ demo và giải thích được luồng.</li>
-</ul>
-<hr>
-<h2>11. Cấu trúc báo cáo</h2>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Chương</th>
-<th>Nội dung</th>
-<th>Phụ trách</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Giới thiệu bài toán và mục tiêu</td>
-<td>C</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Cơ sở lý thuyết (REST, JSON, HTTP, mã trạng thái, timeout, coupling)</td>
-<td>C</td>
-</tr>
-<tr>
-<td>3</td>
-<td>So sánh truy cập CSDL / API / Portal</td>
-<td>C</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Phân tích và thiết kế: sơ đồ kiến trúc, sơ đồ tuần tự, thiết kế API</td>
-<td>A (kiến trúc, API) + B (tuần tự)</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Cài đặt Academic/Finance</td>
-<td>A</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Cài đặt Portal và xử lý lỗi</td>
-<td>B</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Kiểm thử: ma trận, ảnh Postman, log, nhận xét kết quả</td>
-<td>C tổng hợp, A/B cung cấp minh chứng</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Hướng dẫn cài đặt và chạy lại</td>
-<td>B</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Nhận xét, hạn chế, hướng mở rộng</td>
-<td>Cả nhóm</td>
-</tr>
-<tr>
-<td>10</td>
-<td>Công cụ AI đã sử dụng</td>
-<td>C</td>
-</tr>
-<tr>
-<td>Phụ lục</td>
-<td>Mã nguồn chính, Postman Collection, log</td>
-<td>Cả nhóm</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h2>12. Lộ trình thực hiện (điều chỉnh theo hạn nộp thực tế)</h2>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Giai đoạn</th>
-<th>Việc cần xong</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Tuần 1</td>
-<td>Cả nhóm đọc README, chạy được demo, hiểu kiến thức mục 3. Họp chốt mục 9. Chia việc theo mục 10.</td>
-</tr>
-<tr>
-<td>Tuần 2</td>
-<td>A, B làm phần bắt buộc và nâng cấp; C viết chương 1–3 và vẽ khung báo cáo.</td>
-</tr>
-<tr>
-<td>Tuần 3</td>
-<td>Hoàn thiện nâng cấp; kiểm thử đầy đủ; thu thập bằng chứng; ghép báo cáo; làm slide.</td>
-</tr>
-<tr>
-<td>Tuần 4</td>
-<td>Chạy lại từ đầu trên máy sạch; hỏi chéo; tập thuyết trình; rà checklist; nộp.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h2>13. Chuẩn bị thuyết trình và vấn đáp</h2>
-<p><strong>Trình tự demo gợi ý (5–7 phút)</strong></p>
-<ol>
-<li>Giới thiệu bài toán và sơ đồ kiến trúc (1 phút).</li>
-<li>Bật 3 dịch vụ, tra <code>SV002</code> trên Portal → thành công.</li>
-<li>Thử <code>SV999</code> (404) và <code>abc</code> (400).</li>
-<li>Dùng Postman gọi trực tiếp một API để cho thấy request/response.</li>
-<li><strong>Tắt Finance trước mặt giảng viên</strong>, tra lại <code>SV001</code> → Portal vẫn hiển thị, kèm cảnh báo; mở log.</li>
-<li>Trình bày bảng so sánh ba cách tích hợp và hạn chế.</li>
-</ol>
-<p><strong>Câu hỏi giảng viên hay hỏi</strong></p>
-<ul>
-<li>Vì sao dùng API mà không đọc thẳng CSDL của Finance?</li>
-<li>Khi Finance sập, Portal xử lý thế nào? Vì sao <code>partial</code>?</li>
-<li>Mã 400, 404, 503 khác nhau thế nào?</li>
-<li>Địa chỉ dịch vụ đang gắn cứng trong mã, giải pháp là gì? (biến môi trường, file cấu hình, service discovery)</li>
-<li>Portal có là điểm lỗi tập trung không? Gọi tuần tự hay song song tốt hơn?</li>
-<li>Nếu hai hệ thống đổi tên trường JSON thì ảnh hưởng đến đâu? (versioning)</li>
-<li>Demo này khác gì hệ thống thật? (CSDL, xác thực, giám sát, retry)</li>
-<li>Thành viên X làm phần nào? Hãy giải thích đoạn mã này (hỏi chéo từng người).</li>
-</ul>
-<hr>
-<h2>14. Checklist nộp bài (đối chiếu với đề)</h2>
-<ul>
-<li><input disabled="" type="checkbox"> Báo cáo: bài toán, kiến thức, kiến trúc, luồng dữ liệu</li>
-<li><input disabled="" type="checkbox"> Mã nguồn, tệp cấu hình, dữ liệu giả lập (≥ 10 sinh viên)</li>
-<li><input disabled="" type="checkbox"> Hướng dẫn cài đặt, chạy lại (mục 7)</li>
-<li><input disabled="" type="checkbox"> ≥ 3 endpoint rõ chức năng</li>
-<li><input disabled="" type="checkbox"> Postman: thành công / không tìm thấy / đầu vào không hợp lệ</li>
-<li><input disabled="" type="checkbox"> Ít nhất 1 tình huống lỗi được kiểm thử (một API không phản hồi)</li>
-<li><input disabled="" type="checkbox"> Sơ đồ luồng yêu cầu</li>
-<li><input disabled="" type="checkbox"> Bằng chứng kiểm thử và nhận xét kết quả</li>
-<li><input disabled="" type="checkbox"> Dữ liệu 100% giả lập, không có thông tin cá nhân thật</li>
-<li><input disabled="" type="checkbox"> Mục nêu công cụ AI đã dùng</li>
-<li><input disabled="" type="checkbox"> Chạy lại thành công trên máy sạch theo README</li>
-<li><input disabled="" type="checkbox"> Mỗi thành viên giải thích được toàn bộ hệ thống</li>
-</ul>
-<hr>
-<h2>15. Xử lý sự cố thường gặp</h2>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Hiện tượng</th>
-<th>Nguyên nhân và cách xử lý</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Address already in use</code> / cổng đang bận</td>
-<td>Đã có tiến trình dùng cổng đó (kể cả lần chạy trước). Đóng terminal cũ hoặc tắt tiến trình. Không chạy <code>test_demo.py</code> khi đang bật dịch vụ bằng tay.</td>
-</tr>
-<tr>
-<td><code>ModuleNotFoundError: flask</code></td>
-<td>Chưa kích hoạt venv hoặc chưa <code>pip install -r requirements.txt</code>.</td>
-</tr>
-<tr>
-<td><code>python</code> không chạy trên Mac/Linux</td>
-<td>Dùng <code>python3</code> thay thế.</td>
-</tr>
-<tr>
-<td>Portal luôn báo &quot;không phản hồi&quot;</td>
-<td>Academic hoặc Finance chưa chạy, hoặc chạy sai cổng. Kiểm tra <code>http://127.0.0.1:5001/health</code> và <code>:5002/health</code>.</td>
-</tr>
-<tr>
-<td>Tiếng Việt hiển thị lỗi trong terminal Windows</td>
-<td>Dùng Windows Terminal/VS Code terminal hoặc chạy <code>chcp 65001</code>.</td>
-</tr>
-<tr>
-<td>Test <code>test_demo.py</code> đứng yên</td>
-<td>Cổng bị chiếm; đóng mọi dịch vụ đang chạy rồi thử lại.</td>
-</tr>
-</tbody>
-</table>
-</div>
-<hr>
-<h2>16. Hạn chế và hướng mở rộng</h2>
-<p><strong>Hạn chế hiện tại (nên nêu thẳng trong báo cáo)</strong></p>
-<ul>
-<li>Dữ liệu lưu trong bộ nhớ (dict), chưa dùng CSDL thật; dữ liệu POST mất khi khởi động lại dịch vụ.</li>
-<li>Chưa có xác thực, phân quyền.</li>
-<li>Chưa có retry, circuit breaker, caching.</li>
-<li>Server phát triển của Flask, không dùng cho môi trường thật.</li>
-</ul>
-<p><strong>Hướng mở rộng</strong></p>
-<ul>
-<li>API Gateway, xác thực bằng API key hoặc JWT.</li>
-<li>Thay dict bằng CSDL (SQLite/MySQL).</li>
-<li>Caching ở Portal; circuit breaker khi một dịch vụ lỗi kéo dài.</li>
-<li>Chuyển các luồng không cần phản hồi tức thời sang bất đồng bộ (message queue).</li>
-</ul>
-<hr>
-<h2>17. Công cụ AI đã sử dụng</h2>
-<blockquote>
-<p>Đề bài cho phép dùng AI để tìm hiểu lý thuyết, hỗ trợ viết mã và gỡ lỗi, nhưng <strong>nhóm phải tự kiểm tra tính đúng đắn và giải thích được</strong> giải pháp đã nộp. Ghi ngắn gọn, trung thực:</p>
-</blockquote>
-<div class="md-table" role="group" aria-label="Table" tabindex="0"><table>
-<thead>
-<tr>
-<th>Công cụ</th>
-<th>Dùng vào việc</th>
-<th>Phần nhóm đã tự kiểm tra/chỉnh sửa</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Claude</td>
-<td>Dựng khung mã nguồn nền, soạn README và kế hoạch</td>
-<td>(nhóm điền)</td>
-</tr>
-</tbody>
-</table>
-</div>
+    <p>
+      Lưu ý: dừng các dịch vụ đang chạy tay (7.2) trước khi chạy test, vì test
+      dùng cùng các cổng.
+    </p>
+    <hr />
+    <h2>8. Kịch bản và ma trận kiểm thử</h2>
+    <h3>8.1 Test tự động hiện có (<code>test_demo.py</code>)</h3>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Mã</th>
+            <th>Mô tả</th>
+            <th>Kết quả mong đợi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TC01</td>
+            <td><code>GET /api/portal/SV002</code></td>
+            <td>200, <code>status: ok</code></td>
+          </tr>
+          <tr>
+            <td>TC02</td>
+            <td><code>GET /api/portal/SV999</code></td>
+            <td>404</td>
+          </tr>
+          <tr>
+            <td>TC03</td>
+            <td><code>GET /api/portal/abc</code></td>
+            <td>400</td>
+          </tr>
+          <tr>
+            <td>TC04</td>
+            <td><code>GET /api/portal/SV008</code> (có SV, chưa có phí)</td>
+            <td>200, <code>status: partial</code></td>
+          </tr>
+          <tr>
+            <td>TC05</td>
+            <td><code>POST /api/fees/SV006</code> body hợp lệ</td>
+            <td>201</td>
+          </tr>
+          <tr>
+            <td>TC06</td>
+            <td><code>POST /api/fees/SV006</code> body sai</td>
+            <td>400</td>
+          </tr>
+          <tr>
+            <td>TC07</td>
+            <td>Tắt Finance, gọi <code>SV001</code></td>
+            <td>200, <code>partial</code>, vẫn có thông tin SV</td>
+          </tr>
+          <tr>
+            <td>TC08</td>
+            <td>Tắt cả Academic và Finance</td>
+            <td>503</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>8.2 Test nên bổ sung</h3>
+    <ul>
+      <li>Academic sập, Finance còn → <code>partial</code>, chỉ có học phí.</li>
+      <li>
+        Finance <strong>chậm</strong> hơn timeout (dùng tham số
+        <code>?delay=</code> do A thêm) → Portal không treo, trả
+        <code>partial</code>.
+      </li>
+      <li>Kiểm tra các khoản phí POST rồi GET lại thấy khoản mới.</li>
+      <li>
+        Các mã SV biên: <code>SV000</code>, <code>SV1</code>,
+        <code>sv001</code> (chữ thường), chuỗi rỗng, ký tự đặc biệt.
+      </li>
+    </ul>
+    <h3>8.3 Mẫu ma trận kiểm thử cho báo cáo</h3>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Mã TC</th>
+            <th>Mô tả</th>
+            <th>Đầu vào</th>
+            <th>Kết quả mong đợi</th>
+            <th>Kết quả thực tế</th>
+            <th>Đạt/Không</th>
+            <th>Minh chứng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TC01</td>
+            <td>Tra cứu thành công</td>
+            <td><code>SV002</code></td>
+            <td>200, ok</td>
+            <td></td>
+            <td></td>
+            <td><code>evidence/TC01_*.png</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>8.4 Danh sách request Postman cần có</h3>
+    <p>
+      <code>SV002 → 200</code>, <code>SV999 → 404</code>,
+      <code>abc → 400</code>, <code>SV008 → partial</code>,
+      <code>POST fees → 201</code>, <code>POST body sai → 400</code>, và kịch
+      bản Finance sập. Xuất Collection ra <code>postman/</code> dưới dạng JSON.
+    </p>
+    <hr />
+    <h2>9. Quy ước chung của nhóm (mỗi người một máy)</h2>
+    <p><strong>Họp đầu tiên phải chốt các mục dưới đây.</strong></p>
+    <h3>9.1 Môi trường</h3>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Cùng phiên bản Python (đề xuất
+        3.10 hoặc 3.11). Ghi phiên bản đã chọn: <code>________</code>
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Luôn cài thư viện bằng
+        <code>requirements.txt</code> trong virtual environment (mục 7.1).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Giữ nguyên cổng 5000, 5001, 5002.
+        Nếu cổng bị trùng trên máy ai thì báo nhóm, không tự sửa cứng.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Không dùng lệnh riêng của một hệ
+        điều hành trong tài liệu và mã (tránh <code>mkdir -p</code>, đường dẫn
+        kiểu <code>C:\...</code>).
+      </li>
+    </ul>
+    <h3>9.2 Hợp đồng API</h3>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Mục 5 là chuẩn chung. Muốn đổi
+        URL, tên trường JSON hay mã lỗi → báo nhóm
+        <strong>trước khi</strong> đổi và ghi vào <code>CHANGELOG.md</code>.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Người đổi API chịu trách nhiệm cập
+        nhật Postman và báo người phụ thuộc (A → B, C).
+      </li>
+    </ul>
+    <h3>9.3 Quy trình làm việc</h3>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" />
+        <strong>Một người giữ bản chính</strong> (đề xuất C) và chịu trách nhiệm
+        ghép. Người khác gửi file đã sửa cho người này.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Mỗi người
+        <strong>chỉ sửa file thuộc phần mình</strong> (mục 10). Cần sửa file của
+        người khác thì nhắn trước.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Nếu gửi zip: đặt tên có ngày giờ,
+        ví dụ <code>bt04_v3_1211.zip</code>.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Họp tối thiểu
+        <strong>1 lần mỗi tuần</strong>; đầu buổi mỗi người báo: đã xong gì,
+        đang vướng gì, có đổi gì ở API không.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" />
+        <strong>Git là tuỳ chọn.</strong> Đề không bắt buộc. Nếu dùng: mỗi người
+        một nhánh <code>feature/a-...</code>, <code>feature/b-...</code>,
+        <code>feature/c-...</code>; trước khi làm <code>git pull</code>, làm
+        xong <code>git add .</code>, <code>git commit -m &quot;...&quot;</code>,
+        <code>git push</code>. Nếu không dùng: dùng một thư mục chung trên
+        Drive/OneDrive và tuân thủ quy tắc &quot;mỗi người một file&quot; ở
+        trên.
+      </li>
+    </ul>
+    <h3>9.4 Chuẩn bằng chứng và tài liệu</h3>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Ảnh chụp, log, file Postman lưu ở
+        <code>evidence/</code> và <code>postman/</code>. Đặt tên có quy tắc:
+        <code>TC01_thanhcong.png</code>, <code>TC07_financedown.png</code>.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Dùng một mẫu ma trận kiểm thử duy
+        nhất (mục 8.3).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Báo cáo viết chung trên một nơi
+        (Google Docs hoặc OneDrive Word) để cùng chỉnh sửa mà không phải ghép
+        nhiều file.
+      </li>
+    </ul>
+    <h3>9.5 Kiểm thử chéo</h3>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Sau mỗi thay đổi lớn,
+        <strong>ít nhất một người khác</strong> tải bản mới về và chạy
+        <code>python test_demo.py</code> trên máy mình. Đạt 8/8 mới coi là xong.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Tuần cuối: chạy lại
+        <strong>từ đầu trên một máy sạch</strong> (hoặc máy của người chưa từng
+        chạy) theo đúng README.
+      </li>
+    </ul>
+    <hr />
+    <h2>10. Phân công nhiệm vụ</h2>
+    <blockquote>
+      <p>
+        Mã nguồn nền đã có sẵn.
+        <strong>Mỗi người phải chạy được toàn bộ demo trước</strong>, rồi mới
+        làm phần của mình. Phần &quot;Nâng cấp&quot; là nơi lấy điểm cao ở tiêu
+        chí <em>Demo (35%)</em> và <em>Thiết kế (15%)</em>. Mỗi người tự viết
+        phần báo cáo về phần mình làm để khi vấn đáp trả lời được tự nhiên.
+      </p>
+    </blockquote>
+    <h3>Tổng quan phân công</h3>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th><strong>A</strong></th>
+            <th><strong>B</strong></th>
+            <th><strong>C</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Code</td>
+            <td>Academic + Finance</td>
+            <td>Portal</td>
+            <td>Mở rộng <code>test_demo.py</code></td>
+          </tr>
+          <tr>
+            <td>Postman</td>
+            <td>Academic + Finance</td>
+            <td>Portal + kịch bản lỗi</td>
+            <td>Tổng hợp, kiểm tra chéo</td>
+          </tr>
+          <tr>
+            <td>Sơ đồ</td>
+            <td>Sơ đồ kiến trúc</td>
+            <td>Sơ đồ tuần tự (3 luồng)</td>
+            <td>Bảng so sánh 3 cách tích hợp</td>
+          </tr>
+          <tr>
+            <td>Báo cáo</td>
+            <td>Thiết kế API + cài đặt Academic/Finance</td>
+            <td>Cài đặt Portal + xử lý lỗi + hướng dẫn chạy</td>
+            <td>Chương 1, 2, 3, 8 + <strong>ghép toàn bộ</strong></td>
+          </tr>
+          <tr>
+            <td>Khác</td>
+            <td></td>
+            <td></td>
+            <td>Slide, mục công cụ AI, rà checklist</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>👤 Thành viên A – Backend dữ liệu (Academic + Finance)</h3>
+    <p>
+      <strong>File phụ trách:</strong> <code>academic_api.py</code>,
+      <code>finance_api.py</code>
+    </p>
+    <p><strong>Bắt buộc</strong></p>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Giải thích được từng endpoint và
+        từng nhánh trả 400/404/201.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Rà dữ liệu giả lập: đủ 10 sinh
+        viên, hợp lý, không dùng dữ liệu thật.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Viết
+        <strong>bảng mô tả API</strong> (endpoint, method, tham số, ví dụ
+        request/response, mã lỗi) cho báo cáo.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Tạo
+        <strong>Postman Collection cho Academic và Finance</strong> (200, 400,
+        404, 201) và chụp ảnh vào <code>evidence/</code>.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Vẽ
+        <strong>sơ đồ kiến trúc</strong> (có thể dựa trên sơ đồ ở mục 4, vẽ lại
+        bằng draw.io hoặc PlantUML).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Viết chương
+        <em>Thiết kế API</em> và <em>Cài đặt Academic/Finance</em> trong báo
+        cáo.
+      </li>
+    </ul>
+    <p><strong>Nâng cấp (nên làm ≥ 2)</strong></p>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Thêm tiền tố
+        <code>/api/v1/...</code> (báo B và C ngay khi đổi).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Viết <code>openapi.yaml</code> mô
+        tả Academic và Finance.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Thêm <code>PUT</code> hoặc
+        <code>DELETE</code> cho khoản học phí.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Thêm tham số
+        <code>?delay=3</code> cho Finance để giả lập chậm (phục vụ test timeout
+        của B).
+      </li>
+    </ul>
+    <p><strong>Phải giải thích được khi vấn đáp</strong></p>
+    <ul>
+      <li>Vì sao Finance không đọc chung CSDL với Academic mà phải qua API?</li>
+      <li>Vì sao sai định dạng trả 400 còn không tồn tại trả 404?</li>
+      <li>Vì sao POST thành công trả 201 chứ không phải 200?</li>
+    </ul>
+    <h3>👤 Thành viên B – Portal và xử lý lỗi</h3>
+    <p><strong>File phụ trách:</strong> <code>portal.py</code></p>
+    <p><strong>Bắt buộc</strong></p>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Giải thích được hàm
+        <code>call()</code> (timeout, bắt lỗi, ghi log) và logic
+        <code>partial</code> / <code>ALL_DOWN</code>.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Tạo
+        <strong>Postman Collection cho Portal và các kịch bản lỗi</strong>
+        (Finance sập, Academic sập, cả hai sập, timeout).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Chụp ảnh giao diện web ở các
+        trường hợp: thành công, 404, 400, Finance sập.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Chọn các dòng
+        <code>logs/portal.log</code> làm minh chứng cho từng tình huống.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Vẽ
+        <strong>sơ đồ tuần tự</strong> cho 3 luồng: thành công, một API lỗi,
+        không tìm thấy.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Viết chương
+        <em>Cài đặt Portal và xử lý lỗi</em> và
+        <em>Hướng dẫn cài đặt, chạy lại</em> trong báo cáo.
+      </li>
+    </ul>
+    <p><strong>Nâng cấp (nên làm ≥ 2)</strong></p>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Đưa <code>ACADEMIC_URL</code>,
+        <code>FINANCE_URL</code>, <code>TIMEOUT</code> ra
+        <strong>biến môi trường</strong> (<code>os.environ.get</code>).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Gọi hai API
+        <strong>song song</strong>
+        (<code>concurrent.futures.ThreadPoolExecutor</code>) và đo thời gian so
+        với tuần tự.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Thử độ trễ bằng
+        <code>?delay=</code> của A để chứng minh Portal không treo khi vượt
+        timeout.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Thêm <strong>retry</strong> đơn
+        giản (tối đa 1–2 lần) cho lỗi tạm thời.
+      </li>
+    </ul>
+    <p><strong>Phải giải thích được khi vấn đáp</strong></p>
+    <ul>
+      <li>Portal có phải điểm lỗi tập trung không? Giảm rủi ro thế nào?</li>
+      <li>
+        Vì sao trả <code>partial</code> thay vì báo lỗi hoàn toàn khi Finance
+        sập?
+      </li>
+      <li>Khi nào dùng 502/504 thay cho 503?</li>
+      <li>Gọi tuần tự và song song khác nhau gì về thời gian phản hồi?</li>
+    </ul>
+    <h3>👤 Thành viên C – Tổng hợp, kiểm thử, báo cáo</h3>
+    <p>
+      <strong>Phụ trách:</strong> <code>docs/</code>, <code>test_demo.py</code>,
+      ma trận kiểm thử, báo cáo tổng, slide
+    </p>
+    <p><strong>Bắt buộc</strong></p>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Viết chương 1 (giới thiệu), 2 (cơ
+        sở lý thuyết), 3 (so sánh ba cách tích hợp), 8 (nhận xét, hạn chế).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Lập
+        <strong>ma trận kiểm thử</strong> tổng hợp theo mẫu mục 8.3, đối chiếu
+        với ảnh minh chứng của A và B.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Mở rộng
+        <code>test_demo.py</code> (test Academic sập, test timeout, test POST
+        rồi GET lại).
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> <strong>Giữ bản chính</strong> và
+        ghép báo cáo, kiểm tra thống nhất về định dạng.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Làm slide thuyết trình; viết mục
+        <em>Công cụ AI đã sử dụng</em>.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Rà checklist nộp bài (mục 14)
+        trước khi nộp.
+      </li>
+    </ul>
+    <p><strong>Nâng cấp (nên làm ≥ 1)</strong></p>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Làm bảng so sánh ba cách tích hợp
+        kèm ví dụ minh hoạ bằng chính demo.
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Đo và trình bày bảng so sánh thời
+        gian phản hồi (tuần tự/song song, bình thường/chậm).
+      </li>
+    </ul>
+    <p><strong>Phải giải thích được khi vấn đáp</strong></p>
+    <ul>
+      <li>Mỗi test case kiểm tra điều gì và vì sao quan trọng?</li>
+      <li>Luồng một request đi qua các thành phần nào, theo thứ tự nào?</li>
+      <li>Demo còn thiếu gì so với hệ thống thực tế?</li>
+    </ul>
+    <h3>🤝 Việc chung</h3>
+    <ul>
+      <li>
+        Mỗi người chạy được cả 3 dịch vụ và <code>test_demo.py</code>
+        <strong>trên máy của mình</strong>.
+      </li>
+      <li>
+        <strong>Tuần cuối dành riêng cho hỏi chéo</strong>: A hỏi phần B, B hỏi
+        phần C, C hỏi phần A. Đề chấm từng cá nhân.
+      </li>
+      <li>
+        Nếu năng lực code lệch nhau: người yếu code nhận nhiều phần sơ đồ,
+        Postman và báo cáo hơn, nhưng vẫn phải chạy được toàn bộ demo và giải
+        thích được luồng.
+      </li>
+    </ul>
+    <hr />
+    <h2>11. Cấu trúc báo cáo</h2>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Chương</th>
+            <th>Nội dung</th>
+            <th>Phụ trách</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Giới thiệu bài toán và mục tiêu</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>
+              Cơ sở lý thuyết (REST, JSON, HTTP, mã trạng thái, timeout,
+              coupling)
+            </td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>So sánh truy cập CSDL / API / Portal</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>
+              Phân tích và thiết kế: sơ đồ kiến trúc, sơ đồ tuần tự, thiết kế
+              API
+            </td>
+            <td>A (kiến trúc, API) + B (tuần tự)</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Cài đặt Academic/Finance</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Cài đặt Portal và xử lý lỗi</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Kiểm thử: ma trận, ảnh Postman, log, nhận xét kết quả</td>
+            <td>C tổng hợp, A/B cung cấp minh chứng</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>Hướng dẫn cài đặt và chạy lại</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Nhận xét, hạn chế, hướng mở rộng</td>
+            <td>Cả nhóm</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Công cụ AI đã sử dụng</td>
+            <td>C</td>
+          </tr>
+          <tr>
+            <td>Phụ lục</td>
+            <td>Mã nguồn chính, Postman Collection, log</td>
+            <td>Cả nhóm</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <h2>12. Lộ trình thực hiện (điều chỉnh theo hạn nộp thực tế)</h2>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Giai đoạn</th>
+            <th>Việc cần xong</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tuần 1</td>
+            <td>
+              Cả nhóm đọc README, chạy được demo, hiểu kiến thức mục 3. Họp chốt
+              mục 9. Chia việc theo mục 10.
+            </td>
+          </tr>
+          <tr>
+            <td>Tuần 2</td>
+            <td>
+              A, B làm phần bắt buộc và nâng cấp; C viết chương 1–3 và vẽ khung
+              báo cáo.
+            </td>
+          </tr>
+          <tr>
+            <td>Tuần 3</td>
+            <td>
+              Hoàn thiện nâng cấp; kiểm thử đầy đủ; thu thập bằng chứng; ghép
+              báo cáo; làm slide.
+            </td>
+          </tr>
+          <tr>
+            <td>Tuần 4</td>
+            <td>
+              Chạy lại từ đầu trên máy sạch; hỏi chéo; tập thuyết trình; rà
+              checklist; nộp.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <h2>13. Chuẩn bị thuyết trình và vấn đáp</h2>
+    <p><strong>Trình tự demo gợi ý (5–7 phút)</strong></p>
+    <ol>
+      <li>Giới thiệu bài toán và sơ đồ kiến trúc (1 phút).</li>
+      <li>Bật 3 dịch vụ, tra <code>SV002</code> trên Portal → thành công.</li>
+      <li>Thử <code>SV999</code> (404) và <code>abc</code> (400).</li>
+      <li>Dùng Postman gọi trực tiếp một API để cho thấy request/response.</li>
+      <li>
+        <strong>Tắt Finance trước mặt giảng viên</strong>, tra lại
+        <code>SV001</code> → Portal vẫn hiển thị, kèm cảnh báo; mở log.
+      </li>
+      <li>Trình bày bảng so sánh ba cách tích hợp và hạn chế.</li>
+    </ol>
+    <p><strong>Câu hỏi giảng viên hay hỏi</strong></p>
+    <ul>
+      <li>Vì sao dùng API mà không đọc thẳng CSDL của Finance?</li>
+      <li>
+        Khi Finance sập, Portal xử lý thế nào? Vì sao <code>partial</code>?
+      </li>
+      <li>Mã 400, 404, 503 khác nhau thế nào?</li>
+      <li>
+        Địa chỉ dịch vụ đang gắn cứng trong mã, giải pháp là gì? (biến môi
+        trường, file cấu hình, service discovery)
+      </li>
+      <li>
+        Portal có là điểm lỗi tập trung không? Gọi tuần tự hay song song tốt
+        hơn?
+      </li>
+      <li>
+        Nếu hai hệ thống đổi tên trường JSON thì ảnh hưởng đến đâu? (versioning)
+      </li>
+      <li>Demo này khác gì hệ thống thật? (CSDL, xác thực, giám sát, retry)</li>
+      <li>
+        Thành viên X làm phần nào? Hãy giải thích đoạn mã này (hỏi chéo từng
+        người).
+      </li>
+    </ul>
+    <hr />
+    <h2>14. Checklist nộp bài (đối chiếu với đề)</h2>
+    <ul>
+      <li>
+        <input disabled="" type="checkbox" /> Báo cáo: bài toán, kiến thức, kiến
+        trúc, luồng dữ liệu
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Mã nguồn, tệp cấu hình, dữ liệu
+        giả lập (≥ 10 sinh viên)
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Hướng dẫn cài đặt, chạy lại (mục
+        7)
+      </li>
+      <li><input disabled="" type="checkbox" /> ≥ 3 endpoint rõ chức năng</li>
+      <li>
+        <input disabled="" type="checkbox" /> Postman: thành công / không tìm
+        thấy / đầu vào không hợp lệ
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Ít nhất 1 tình huống lỗi được kiểm
+        thử (một API không phản hồi)
+      </li>
+      <li><input disabled="" type="checkbox" /> Sơ đồ luồng yêu cầu</li>
+      <li>
+        <input disabled="" type="checkbox" /> Bằng chứng kiểm thử và nhận xét
+        kết quả
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Dữ liệu 100% giả lập, không có
+        thông tin cá nhân thật
+      </li>
+      <li><input disabled="" type="checkbox" /> Mục nêu công cụ AI đã dùng</li>
+      <li>
+        <input disabled="" type="checkbox" /> Chạy lại thành công trên máy sạch
+        theo README
+      </li>
+      <li>
+        <input disabled="" type="checkbox" /> Mỗi thành viên giải thích được
+        toàn bộ hệ thống
+      </li>
+    </ul>
+    <hr />
+    <h2>15. Xử lý sự cố thường gặp</h2>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Hiện tượng</th>
+            <th>Nguyên nhân và cách xử lý</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Address already in use</code> / cổng đang bận</td>
+            <td>
+              Đã có tiến trình dùng cổng đó (kể cả lần chạy trước). Đóng
+              terminal cũ hoặc tắt tiến trình. Không chạy
+              <code>test_demo.py</code> khi đang bật dịch vụ bằng tay.
+            </td>
+          </tr>
+          <tr>
+            <td><code>ModuleNotFoundError: flask</code></td>
+            <td>
+              Chưa kích hoạt venv hoặc chưa
+              <code>pip install -r requirements.txt</code>.
+            </td>
+          </tr>
+          <tr>
+            <td><code>python</code> không chạy trên Mac/Linux</td>
+            <td>Dùng <code>python3</code> thay thế.</td>
+          </tr>
+          <tr>
+            <td>Portal luôn báo &quot;không phản hồi&quot;</td>
+            <td>
+              Academic hoặc Finance chưa chạy, hoặc chạy sai cổng. Kiểm tra
+              <code>http://127.0.0.1:5001/health</code> và
+              <code>:5002/health</code>.
+            </td>
+          </tr>
+          <tr>
+            <td>Tiếng Việt hiển thị lỗi trong terminal Windows</td>
+            <td>
+              Dùng Windows Terminal/VS Code terminal hoặc chạy
+              <code>chcp 65001</code>.
+            </td>
+          </tr>
+          <tr>
+            <td>Test <code>test_demo.py</code> đứng yên</td>
+            <td>Cổng bị chiếm; đóng mọi dịch vụ đang chạy rồi thử lại.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <h2>16. Hạn chế và hướng mở rộng</h2>
+    <p><strong>Hạn chế hiện tại (nên nêu thẳng trong báo cáo)</strong></p>
+    <ul>
+      <li>
+        Dữ liệu lưu trong bộ nhớ (dict), chưa dùng CSDL thật; dữ liệu POST mất
+        khi khởi động lại dịch vụ.
+      </li>
+      <li>Chưa có xác thực, phân quyền.</li>
+      <li>Chưa có retry, circuit breaker, caching.</li>
+      <li>Server phát triển của Flask, không dùng cho môi trường thật.</li>
+    </ul>
+    <p><strong>Hướng mở rộng</strong></p>
+    <ul>
+      <li>API Gateway, xác thực bằng API key hoặc JWT.</li>
+      <li>Thay dict bằng CSDL (SQLite/MySQL).</li>
+      <li>Caching ở Portal; circuit breaker khi một dịch vụ lỗi kéo dài.</li>
+      <li>
+        Chuyển các luồng không cần phản hồi tức thời sang bất đồng bộ (message
+        queue).
+      </li>
+    </ul>
+    <hr />
+    <h2>17. Công cụ AI đã sử dụng</h2>
+    <blockquote>
+      <p>
+        Đề bài cho phép dùng AI để tìm hiểu lý thuyết, hỗ trợ viết mã và gỡ lỗi,
+        nhưng
+        <strong>nhóm phải tự kiểm tra tính đúng đắn và giải thích được</strong>
+        giải pháp đã nộp. Ghi ngắn gọn, trung thực:
+      </p>
+    </blockquote>
+    <div class="md-table" role="group" aria-label="Table" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Công cụ</th>
+            <th>Dùng vào việc</th>
+            <th>Phần nhóm đã tự kiểm tra/chỉnh sửa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Claude</td>
+            <td>Dựng khung mã nguồn nền, soạn README và kế hoạch</td>
+            <td>(nhóm điền)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-
-<!--claude-mermaid-runtime-begin:3477-->
-<style>.mermaid-diagram{margin-block:4px}.mermaid-diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}</style>
-<script src="/_runtime/mermaid-11.16.1.min.js"></script>
-<script>(function(){
-var CFG={"palettes":{"light":{"surface":"#f4efe4","text":"#42392e","line":"#8a7f6d","border":"#7a6c52","bg":"#fffdf8"},"dark":{"surface":"#262b34","text":"#f2f3f5","line":"#a8adb8","border":"#9aa4b8","bg":"#1f232b"}}};
-if(typeof mermaid==='undefined')return;
-var pres=Array.prototype.slice.call(document.querySelectorAll('pre.mermaid')).filter(function(p){if(p.hasAttribute('data-claude-mermaid-claimed'))return false;p.setAttribute('data-claude-mermaid-claimed','1');return true;});
-if(!pres.length)return;
-var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
-var root=document.documentElement;
-var items=pres.map(function(pre){
-var mount=document.createElement('div');mount.className='mermaid-diagram';
-return {pre:pre,mount:mount,src:pre.textContent||''};
-});
-var seq=0;
-var renderGen=0;
-var lastKey='';
-function pageBg(fallback){
-var els=[document.body,document.documentElement];
-for(var i=0;i<els.length;i++){
-var c=els[i]&&getComputedStyle(els[i]).backgroundColor;
-if(c&&c!=='transparent'&&c!=='rgba(0, 0, 0, 0)')return c;
-}
-return fallback;
-}
-function render(){
-var theme=root.getAttribute('data-theme');
-var dark=theme==='dark'||(!!(mq&&mq.matches)&&theme!=='light');
-var pal=dark?CFG.palettes.dark:CFG.palettes.light;
-var bg=pageBg(pal.bg);
-var key=(dark?'d':'l')+'|'+bg;
-if(key===lastKey)return;
-lastKey=key;
-var gen=++renderGen;
-var font=getComputedStyle(document.body).fontFamily||'sans-serif';
-var nat={useMaxWidth:false};
-mermaid.initialize({
-startOnLoad:false,securityLevel:'strict',theme:'base',
-flowchart:nat,sequence:nat,er:nat,state:nat,class:nat,pie:nat,
-gantt:nat,journey:nat,timeline:nat,gitGraph:nat,mindmap:nat,xyChart:nat,
-quadrantChart:nat,sankey:nat,c4:nat,requirement:nat,block:nat,
-packet:nat,kanban:nat,architecture:nat,radar:nat,
-themeVariables:{background:bg,mainBkg:pal.surface,primaryColor:pal.surface,
-primaryTextColor:pal.text,lineColor:pal.line,primaryBorderColor:pal.border,
-nodeBorder:pal.border,clusterBorder:pal.border,edgeLabelBackground:bg,
-clusterBkg:'rgba(127,127,127,0.07)',titleColor:pal.text,
-darkMode:dark,rowOdd:bg,rowEven:'rgba(127,127,127,0.07)',
-attributeBackgroundColorOdd:bg,attributeBackgroundColorEven:'rgba(127,127,127,0.07)',
-fontSize:'16px',fontFamily:font},
-themeCSS:'.node rect, .node circle, .node polygon, .node path, .cluster rect { stroke-width: 2px; }'
-});
-items.forEach(function(it){
-var id='claude-mermaid-'+seq++;
-mermaid.render(id,it.src).then(function(r){
-if(gen!==renderGen)return;
-var prev=it.pre.previousElementSibling;
-if(prev&&prev.className==='mermaid-diagram'&&prev!==it.mount)return;
-it.mount.innerHTML=r.svg;
-if(!it.mount.parentNode)it.pre.parentNode.insertBefore(it.mount,it.pre);
-it.pre.style.display='none';
-},function(){
-var scratch=document.getElementById(id);
-if(scratch)scratch.parentNode.removeChild(scratch);
-scratch=document.getElementById('d'+id);
-if(scratch)scratch.parentNode.removeChild(scratch);
-if(gen!==renderGen)return;
-if(it.mount.parentNode)it.mount.parentNode.removeChild(it.mount);
-it.pre.style.display='';
-});
-});
-}
-render();
-if(mq&&mq.addEventListener)mq.addEventListener('change',render);
-if(typeof MutationObserver!=='undefined')new MutationObserver(render).observe(root,{attributes:true,attributeFilter:['data-theme']});
-})();</script>
-<!--claude-mermaid-runtime-end-->
-</body></html>
+    <style>
+      .mermaid-diagram {
+        margin-block: 4px;
+      }
+      .mermaid-diagram svg {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+    <script src="/_runtime/mermaid-11.16.1.min.js"></script>
+    <script>
+      (function () {
+        var CFG = {
+          palettes: {
+            light: {
+              surface: "#f4efe4",
+              text: "#42392e",
+              line: "#8a7f6d",
+              border: "#7a6c52",
+              bg: "#fffdf8",
+            },
+            dark: {
+              surface: "#262b34",
+              text: "#f2f3f5",
+              line: "#a8adb8",
+              border: "#9aa4b8",
+              bg: "#1f232b",
+            },
+          },
+        };
+        if (typeof mermaid === "undefined") return;
+        var pres = Array.prototype.slice
+          .call(document.querySelectorAll("pre.mermaid"))
+          .filter(function (p) {
+            if (p.hasAttribute("data-claude-mermaid-claimed")) return false;
+            p.setAttribute("data-claude-mermaid-claimed", "1");
+            return true;
+          });
+        if (!pres.length) return;
+        var mq = window.matchMedia
+          ? window.matchMedia("(prefers-color-scheme: dark)")
+          : null;
+        var root = document.documentElement;
+        var items = pres.map(function (pre) {
+          var mount = document.createElement("div");
+          mount.className = "mermaid-diagram";
+          return { pre: pre, mount: mount, src: pre.textContent || "" };
+        });
+        var seq = 0;
+        var renderGen = 0;
+        var lastKey = "";
+        function pageBg(fallback) {
+          var els = [document.body, document.documentElement];
+          for (var i = 0; i < els.length; i++) {
+            var c = els[i] && getComputedStyle(els[i]).backgroundColor;
+            if (c && c !== "transparent" && c !== "rgba(0, 0, 0, 0)") return c;
+          }
+          return fallback;
+        }
+        function render() {
+          var theme = root.getAttribute("data-theme");
+          var dark =
+            theme === "dark" || (!!(mq && mq.matches) && theme !== "light");
+          var pal = dark ? CFG.palettes.dark : CFG.palettes.light;
+          var bg = pageBg(pal.bg);
+          var key = (dark ? "d" : "l") + "|" + bg;
+          if (key === lastKey) return;
+          lastKey = key;
+          var gen = ++renderGen;
+          var font = getComputedStyle(document.body).fontFamily || "sans-serif";
+          var nat = { useMaxWidth: false };
+          mermaid.initialize({
+            startOnLoad: false,
+            securityLevel: "strict",
+            theme: "base",
+            flowchart: nat,
+            sequence: nat,
+            er: nat,
+            state: nat,
+            class: nat,
+            pie: nat,
+            gantt: nat,
+            journey: nat,
+            timeline: nat,
+            gitGraph: nat,
+            mindmap: nat,
+            xyChart: nat,
+            quadrantChart: nat,
+            sankey: nat,
+            c4: nat,
+            requirement: nat,
+            block: nat,
+            packet: nat,
+            kanban: nat,
+            architecture: nat,
+            radar: nat,
+            themeVariables: {
+              background: bg,
+              mainBkg: pal.surface,
+              primaryColor: pal.surface,
+              primaryTextColor: pal.text,
+              lineColor: pal.line,
+              primaryBorderColor: pal.border,
+              nodeBorder: pal.border,
+              clusterBorder: pal.border,
+              edgeLabelBackground: bg,
+              clusterBkg: "rgba(127,127,127,0.07)",
+              titleColor: pal.text,
+              darkMode: dark,
+              rowOdd: bg,
+              rowEven: "rgba(127,127,127,0.07)",
+              attributeBackgroundColorOdd: bg,
+              attributeBackgroundColorEven: "rgba(127,127,127,0.07)",
+              fontSize: "16px",
+              fontFamily: font,
+            },
+            themeCSS:
+              ".node rect, .node circle, .node polygon, .node path, .cluster rect { stroke-width: 2px; }",
+          });
+          items.forEach(function (it) {
+            var id = "claude-mermaid-" + seq++;
+            mermaid.render(id, it.src).then(
+              function (r) {
+                if (gen !== renderGen) return;
+                var prev = it.pre.previousElementSibling;
+                if (
+                  prev &&
+                  prev.className === "mermaid-diagram" &&
+                  prev !== it.mount
+                )
+                  return;
+                it.mount.innerHTML = r.svg;
+                if (!it.mount.parentNode)
+                  it.pre.parentNode.insertBefore(it.mount, it.pre);
+                it.pre.style.display = "none";
+              },
+              function () {
+                var scratch = document.getElementById(id);
+                if (scratch) scratch.parentNode.removeChild(scratch);
+                scratch = document.getElementById("d" + id);
+                if (scratch) scratch.parentNode.removeChild(scratch);
+                if (gen !== renderGen) return;
+                if (it.mount.parentNode)
+                  it.mount.parentNode.removeChild(it.mount);
+                it.pre.style.display = "";
+              },
+            );
+          });
+        }
+        render();
+        if (mq && mq.addEventListener) mq.addEventListener("change", render);
+        if (typeof MutationObserver !== "undefined")
+          new MutationObserver(render).observe(root, {
+            attributes: true,
+            attributeFilter: ["data-theme"],
+          });
+      })();
+    </script>
+  </body>
+</html>

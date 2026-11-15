@@ -1,0 +1,158 @@
+{
+  "info": {
+    "name": "BT04 - Academic & Finance APIs (Thanh vien A - Hieu)",
+    "description": "Postman Collection kiem thu Academic API (5001) va Finance API (5002) - Nhom 17",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Academic API (5001)",
+      "item": [
+        {
+          "name": "A01 - Health Check Academic (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5001/health"
+          }
+        },
+        {
+          "name": "A02 - Danh sach sinh vien (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5001/api/students"
+          }
+        },
+        {
+          "name": "A03 - Chi tiet SV001 thanh cong (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5001/api/students/SV001"
+          }
+        },
+        {
+          "name": "A04 - Ma SV sai dinh dang abc (400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5001/api/students/abc"
+          }
+        },
+        {
+          "name": "A05 - Khong tim thay SV999 (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5001/api/students/SV999"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Finance API (5002)",
+      "item": [
+        {
+          "name": "F01 - Health Check Finance (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5002/health"
+          }
+        },
+        {
+          "name": "F02 - Xem hoc phi SV002 thanh cong (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5002/api/fees/SV002"
+          }
+        },
+        {
+          "name": "F03 - SV008 chua co khoan phi (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5002/api/fees/SV008"
+          }
+        },
+        {
+          "name": "F04 - Ma SV sai dinh dang abc (400)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5002/api/fees/abc"
+          }
+        },
+        {
+          "name": "F05 - POST tao khoan phi SV006 thanh cong (201)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"term\": \"HK1-2026\",\n  \"amount\": 9000000\n}"
+            },
+            "url": "http://127.0.0.1:5002/api/fees/SV006"
+          }
+        },
+        {
+          "name": "F06 - POST body sai amount am (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": -1\n}"
+            },
+            "url": "http://127.0.0.1:5002/api/fees/SV006"
+          }
+        },
+        {
+          "name": "F07 - PUT cap nhat dong phi F002 cua SV002 (200)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"paid\": 12500000\n}"
+            },
+            "url": "http://127.0.0.1:5002/api/fees/SV002/F002"
+          }
+        },
+        {
+          "name": "F08 - DELETE xoa khoan phi F005 cua SV005 (200)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://127.0.0.1:5002/api/fees/SV005/F005"
+          }
+        },
+        {
+          "name": "F09 - GET gia lap tre 3 giay delay=3 (200)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://127.0.0.1:5002/api/fees/SV001?delay=3"
+          }
+        }
+      ]
+    }
+  ]
+}
